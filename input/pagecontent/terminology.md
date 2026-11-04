@@ -10,7 +10,8 @@ sources before using it for implementation.
 |---|---|---|---|---|
 | Result (what was measured) | OBX-3 | `Observation.code` | SNOMED CT UK Edition - PaLM observable entities | The DAPB4101 / NHS England PaLM codes. Example: `1022431000000105` Haemoglobin estimation |
 | | | | LOINC (second coding) | Optional, where known. Example: `718-7` |
-| Test / panel ordered or reported | OBR-4 | `ServiceRequest.code`, `DiagnosticReport.code` | SNOMED CT procedure | Example: `26604007` Complete blood count. **To confirm** - the PaLM code set for requestable tests |
+| Test group / test ordered or reported | OBR-4 | `ServiceRequest.code`, test group `Observation.code` | SNOMED CT UK (PaLM) | Example: `1022441000000101` FBC - full blood count (as the NHS England examples). **To confirm** - the PaLM code set for requestable tests |
+| Report type | - | `DiagnosticReport.code`, `Composition.type` | SNOMED CT, LOINC | `721981007` Diagnostic studies report (NHS England), LOINC `11502-2` Laboratory report |
 | Units | OBX-6 | `valueQuantity.code` | UCUM | Example: `10*9/L`, `g/L`, `mmol/mol` |
 | Coded result | OBX-5 (`CWE`) | `valueCodeableConcept` | SNOMED CT | Organisms, qualifiers (`Positive`, `Not detected`) |
 | Specimen type | SPM-4 | `Specimen.type` | SNOMED CT specimen | Example: `119297000` Blood specimen |
@@ -23,6 +24,8 @@ The SNOMED CT codes in this guide were checked against the UK Edition on tx.fhir
 (`http://snomed.info/sct/83821000000107`), set in the expansion parameters.
 
 <div class="alert alert-info" role="alert">
+<b>Recommendation:</b> use the DAPB4101 codes on every route in England, not only to GP
+systems - see <a href="PaLM.html#what-england-adds">IHE PaLM in England</a>.
 The NHS England <a href="https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dapb4101-pathology-and-laboratory-medicine-reporting-information-standard">DAPB4101</a>
 standard defines the PaLM SNOMED CT codes and their use. Laboratories map their local test
 codes to them (the PaLM mapping project). Where a local code has no PaLM code yet, send the

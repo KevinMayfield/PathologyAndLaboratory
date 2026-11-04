@@ -16,3 +16,6 @@
 /_build.sh
 /_build.bat
 /Specifications/NationalGenomics/
+/.cache/
+/validator_cli.jar
+.ipynb_checkpoints/

@@ -1,6 +1,6 @@
 # sushi-config.yaml is documented https://fshschool.org/docs/sushi/configuration/
-id: fhir.nwgenomics.nhs.uk.palm
-canonical: https://fhir.nwgenomics.nhs.uk/PaLM
+id: uk.org.examplesihe.palm
+canonical: https://examplesihe.org.uk
 version: 0.1.0
 name: EnglandPaLM
 title: England Pathology and Laboratory Medicine (PaLM) Technical Framework
@@ -9,8 +9,8 @@ releaseLabel: ci-build
 status: draft
 experimental: true
 publisher:
-  - name: NHS North West Genomics
-  - url: https://www.nwgenomics.nhs.uk/contact-us
+  - name: Kevin Mayfield
+  - url: https://github.com/KevinMayfield/PathologyAndLaboratory
 license: CC-BY-4.0
 fhirVersion: 4.0.1
 jurisdiction: urn:iso:std:iso:3166#GB "United Kingdom of Great Britain and Northern Ireland"
@@ -79,6 +79,9 @@ pages:
   mapping.md:
     title: Mapping HL7 v2 and FHIR
     generation: markdown
+  NHSEnglandExamples.md:
+    title: NHS England Examples as HL7 v2
+    generation: markdown
   DataModel.md:
     title: FHIR Resources
     generation: markdown
@@ -111,4 +114,5 @@ menu:
   HL7 v2 and Mapping (Volume 4):
     HL7 v2.5.1 Segments and Data Types: hl7v2.html
     Mapping HL7 v2 and FHIR: mapping.html
+    NHS England Examples as HL7 v2: NHSEnglandExamples.html
   Artifacts: artifacts.html

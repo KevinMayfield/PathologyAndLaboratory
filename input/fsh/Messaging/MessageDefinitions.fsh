@@ -8,7 +8,7 @@ InstanceOf: MessageDefinition
 Title: "Message Definition - Laboratory Order (O21)"
 Description: "FHIR Message equivalent of the HL7 v2.5.1 `OML^O21^OML_O21` laboratory order - Placer Order Management [LAB-1], Filler Order Management [LAB-2] and Sub-order Management [LAB-35]. The focus is the Laboratory Order."
 Usage: #definition
-* url = "https://fhir.nwgenomics.nhs.uk/PaLM/MessageDefinition/laboratory-order"
+* url = "https://examplesihe.org.uk/MessageDefinition/laboratory-order"
 * name = "LaboratoryOrder"
 * title = "Laboratory Order (O21)"
 * status = #draft
@@ -33,7 +33,7 @@ The HL7 v2 acknowledgement `ORL^O22` (or `ACK^O21`) is a FHIR response message
 """
 * focus[+]
   * code = #ServiceRequest
-  * profile = "https://fhir.nwgenomics.nhs.uk/PaLM/StructureDefinition/LaboratoryOrder"
+  * profile = "https://examplesihe.org.uk/StructureDefinition/LaboratoryOrder"
   * min = 1
   * max = "*"
 * responseRequired = #always
@@ -43,7 +43,7 @@ InstanceOf: MessageDefinition
 Title: "Message Definition - Laboratory Result (R01)"
 Description: "FHIR Message equivalent of the HL7 v2.5.1 `ORU^R01^ORU_R01` unsolicited result - Order Results Management [LAB-3] and Sub-order Results Delivery [LAB-36]. The focus is the Laboratory Report."
 Usage: #definition
-* url = "https://fhir.nwgenomics.nhs.uk/PaLM/MessageDefinition/laboratory-result"
+* url = "https://examplesihe.org.uk/MessageDefinition/laboratory-result"
 * name = "LaboratoryResult"
 * title = "Laboratory Result (R01)"
 * status = #draft
@@ -68,7 +68,7 @@ The HL7 v2 acknowledgement `ACK^R01` is a FHIR response message (`MessageHeader.
 """
 * focus[+]
   * code = #DiagnosticReport
-  * profile = "https://fhir.nwgenomics.nhs.uk/PaLM/StructureDefinition/LaboratoryReport"
+  * profile = "https://examplesihe.org.uk/StructureDefinition/LaboratoryReport"
   * min = 1
   * max = "*"
 * responseRequired = #always

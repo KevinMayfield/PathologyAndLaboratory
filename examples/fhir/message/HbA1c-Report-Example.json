@@ -1,0 +1,482 @@
+{
+  "resourceType": "Bundle",
+  "id": "9f78bae1-f0dc-5e71-a11a-5bcfc4147536",
+  "meta": {
+    "profile": [
+      "https://examplesihe.org.uk/StructureDefinition/BundleMessage"
+    ]
+  },
+  "identifier": {
+    "value": "NHSE-EX-0001"
+  },
+  "type": "message",
+  "timestamp": "2022-03-08T12:09:00+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:92d17a28-d06d-55b6-b7f6-d3d9daebf9eb",
+      "resource": {
+        "resourceType": "MessageHeader",
+        "id": "92d17a28-d06d-55b6-b7f6-d3d9daebf9eb",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/MessageHeader"
+          ],
+          "lastUpdated": "2022-03-08T12:09:00+00:00"
+        },
+        "eventCoding": {
+          "system": "http://terminology.hl7.org/CodeSystem/v2-0003",
+          "code": "R01",
+          "display": "ORU/ACK - Unsolicited transmission of an observation message"
+        },
+        "destination": [
+          {
+            "name": "GPSYSTEM",
+            "endpoint": "urn:hl7-v2:GPSYSTEM",
+            "receiver": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "B82033"
+              }
+            }
+          }
+        ],
+        "sender": {
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "Y8J7D"
+          }
+        },
+        "source": {
+          "name": "LIMS",
+          "endpoint": "urn:hl7-v2:LIMS"
+        },
+        "focus": [
+          {
+            "reference": "urn:uuid:73f36ee5-bd67-57cb-860a-d12690aa09ba"
+          }
+        ],
+        "definition": "https://examplesihe.org.uk/MessageDefinition/laboratory-result"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/Patient"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "https://examplesihe.org.uk/Id/mrn/RCB",
+            "value": "RCB4719263",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "RCB"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PI"
+                }
+              ]
+            },
+            "system": "https://examplesihe.org.uk/Id/patient-internal/Y8J7D",
+            "value": "Y8J7D0381527",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "NH"
+                }
+              ]
+            },
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        ],
+        "name": [
+          {
+            "family": "EDITESTPATIENT",
+            "given": [
+              "ONE",
+              "John"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1925-01-27",
+        "address": [
+          {
+            "postalCode": "B6 5RQ"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:84c94bb1-4336-5607-9124-6b82052db22a",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "84c94bb1-4336-5607-9124-6b82052db22a",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "practitioner": {
+          "type": "Practitioner",
+          "identifier": {
+            "system": "https://fhir.hl7.org.uk/Id/gmc-number",
+            "value": "C1008215"
+          },
+          "display": "Dr Gale GASKELL"
+        },
+        "organization": {
+          "type": "Organization",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "B82033"
+          },
+          "display": "PICKERING MEDICAL PRACTICE"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d722ddcf-b3da-51eb-b616-01d6c5f1eace",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "d722ddcf-b3da-51eb-b616-01d6c5f1eace",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/LaboratoryOrder"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PLAC"
+                }
+              ]
+            },
+            "system": "http://B82033-pickeringmedicalpractice.com/labrequest",
+            "value": "REQ-20220129-000241",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "B82033"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "FILL"
+                }
+              ]
+            },
+            "system": "http://Y8J7D-pathlab001.com/report",
+            "value": "REP-20220130-007843",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "999791000000106",
+              "display": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "requester": {
+          "reference": "urn:uuid:84c94bb1-4336-5607-9124-6b82052db22a"
+        },
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001"
+          }
+        ],
+        "authoredOn": "2022-01-29T10:24:00+00:00",
+        "specimen": [
+          {
+            "reference": "urn:uuid:c41f9657-4d5b-553e-97db-9caf4478d9ad"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c41f9657-4d5b-553e-97db-9caf4478d9ad",
+      "resource": {
+        "resourceType": "Specimen",
+        "id": "c41f9657-4d5b-553e-97db-9caf4478d9ad",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/Specimen"
+          ]
+        },
+        "status": "available",
+        "type": {
+          "text": "Venous blood specimen"
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "request": [
+          {
+            "reference": "urn:uuid:d722ddcf-b3da-51eb-b616-01d6c5f1eace"
+          }
+        ],
+        "collection": {
+          "collectedDateTime": "2022-01-29T10:18:00+00:00"
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PLAC"
+                }
+              ]
+            },
+            "system": "http://B82033-pickeringmedicalpractice.com/specimen",
+            "value": "SPC-REQ-20220129-000362"
+          }
+        ],
+        "accessionIdentifier": {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "ACSN"
+              }
+            ]
+          },
+          "system": "http://Y8J7D-pathlab001.com/specimen",
+          "value": "SPC-Lab-20220129-008927",
+          "assigner": {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            }
+          }
+        },
+        "receivedTime": "2022-01-29T15:14:00+00:00"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f9469916-f829-5957-a478-acbef4b04196",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "f9469916-f829-5957-a478-acbef4b04196",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/LaboratoryResult"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:d722ddcf-b3da-51eb-b616-01d6c5f1eace"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "999791000000106",
+              "display": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-01-29T10:18:00+00:00",
+        "issued": "2022-01-30T12:48:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001"
+          }
+        ],
+        "valueQuantity": {
+          "value": 54,
+          "unit": "mmol/mol",
+          "system": "http://unitsofmeasure.org",
+          "code": "mmol/mol"
+        },
+        "note": [
+          {
+            "text": "DIAGNOSIS OF DIABETES MELLITUS:\nHbA1c of 48 mmol/mol and above is diagnostic of DM (WHO 2011)\n42 - 47 mmol/mol indicates high risk of DM (NICE Guidance PH38 2012)\n\nMONITORING OF DIABETES MELLITUS (ADULTS):\nType 2 target values: 48 mmol/mol – 57 mmol/mol (NICE Guidelines NG28)\nType 1 target values: 48 mmol/mol or lower (NICE Guidelines NG17)"
+          }
+        ],
+        "specimen": {
+          "reference": "urn:uuid:c41f9657-4d5b-553e-97db-9caf4478d9ad"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:73f36ee5-bd67-57cb-860a-d12690aa09ba",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "73f36ee5-bd67-57cb-860a-d12690aa09ba",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/LaboratoryReport"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "FILL"
+                }
+              ]
+            },
+            "system": "http://Y8J7D-pathlab001.com/report",
+            "value": "REP-20220130-007843",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          }
+        ],
+        "basedOn": [
+          {
+            "reference": "urn:uuid:d722ddcf-b3da-51eb-b616-01d6c5f1eace"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                "code": "CH",
+                "display": "Chemistry"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "721981007",
+              "display": "Diagnostic studies report"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "11502-2",
+              "display": "Laboratory report"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-01-29T10:18:00+00:00",
+        "issued": "2022-01-30T12:48:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001"
+          }
+        ],
+        "specimen": [
+          {
+            "reference": "urn:uuid:c41f9657-4d5b-553e-97db-9caf4478d9ad"
+          }
+        ],
+        "result": [
+          {
+            "reference": "urn:uuid:f9469916-f829-5957-a478-acbef4b04196"
+          }
+        ]
+      }
+    }
+  ]
+}

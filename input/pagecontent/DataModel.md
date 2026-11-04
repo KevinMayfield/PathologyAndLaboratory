@@ -19,7 +19,8 @@ erDiagram
     DiagnosticReport }o--o{ ServiceRequest : basedOn
     DiagnosticReport ||--|| Patient : subject
     DiagnosticReport }o--|| Organization : performer
-    DiagnosticReport ||--o{ Observation : result
+    DiagnosticReport ||--o{ Observation : "result (test group or single test)"
+    Observation ||--o{ Observation : "hasMember (test group)"
     DiagnosticReport }o--o{ Specimen : specimen
     Observation }o--|| Organization : performer
     Specimen ||--|| Patient : subject
@@ -34,8 +35,8 @@ erDiagram
 | [Patient](StructureDefinition-Patient.html) | Patient | HL7 Europe `patient-eu-core` | PID | From the NW GMSA IG |
 | [Laboratory Order](StructureDefinition-LaboratoryOrder.html) | ServiceRequest | HL7 Europe `ServiceRequest-eu-lab` | ORC, OBR (OML), TQ1 | |
 | [Specimen](StructureDefinition-Specimen.html) | Specimen | HL7 Europe `Specimen-eu-lab` | SPM | |
-| [Laboratory Report](StructureDefinition-LaboratoryReport.html) | DiagnosticReport | HL7 Europe `diagnosticReport-eu-core` | OBR (ORU) | See below |
-| [Laboratory Result](StructureDefinition-LaboratoryResult.html) | Observation | HL7 Europe `Observation-resultslab-eu-lab` | OBX | |
+| [Laboratory Report](StructureDefinition-LaboratoryReport.html) | DiagnosticReport | HL7 Europe `diagnosticReport-eu-core` | the OBRs of one report (sharing OBR-3) | One per report. See below |
+| [Laboratory Result](StructureDefinition-LaboratoryResult.html) | Observation | HL7 Europe `Observation-resultslab-eu-lab` | OBX; a test group is the OBR | A test group (organizer) has `hasMember` |
 | [Organization](StructureDefinition-Organization.html) | Organization | HL7 Europe `organization-eu-core` | XON, MSH-4 / MSH-6 | ODS code |
 | [Practitioner](StructureDefinition-Practitioner.html) | Practitioner | HL7 Europe `practitioner-eu-core` | XCN | GMC / NMC / HCPC / GMP |
 | [PractitionerRole](StructureDefinition-PractitionerRole.html) | PractitionerRole | HL7 Europe `practitionerRole-eu-core` | ORC-12 + ORC-21, PV1-8 + PV1-3 | |

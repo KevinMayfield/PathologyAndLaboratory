@@ -16,7 +16,7 @@ Alias: $interp = http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretat
 Instance: LaboratoryOrderFBCNew
 InstanceOf: LaboratoryOrder
 Title: "Laboratory Order - Full blood count (new order)"
-Description: "The order as placed by the GP system - HL7 v2 `ORC|NW|GP-ORD-000123^GPSYSTEM|||||||20261103091000|||G1234567^GREEN^Alex^^^Dr^^^GMP^^^^DN` and `OBR|1|GP-ORD-000123^GPSYSTEM||26604007^Complete blood count^SCT`. Placer Order Management [LAB-1]."
+Description: "The order as placed by the GP system - HL7 v2 `ORC|NW|GP-ORD-000123^GPSYSTEM|||||||20261103091000|||G1234567^GREEN^Alex^^^Dr^^^GMP^^^^DN` and `OBR|1|GP-ORD-000123^GPSYSTEM||1022441000000101^FBC - full blood count^SCT`. Placer Order Management [LAB-1]."
 Usage: #example
 * identifier[placerOrderNumber].type = $v2-0203#PLAC
 * identifier[placerOrderNumber].system = "https://fhir.examplesurgery.nhs.uk/Id/order"
@@ -28,7 +28,7 @@ Usage: #example
 * status = #active
 * intent = #order
 * priority = #routine
-* code = $sct#26604007 "Complete blood count"
+* code = $sct#1022441000000101 "FBC - full blood count"
 * subject = Reference(PatientOctaviaCHISLETT)
 * authoredOn = "2026-11-03T09:10:00Z"
 * requester = Reference(PractitionerRoleGP)
@@ -56,7 +56,7 @@ Usage: #example
 * status = #completed
 * intent = #order
 * priority = #routine
-* code = $sct#26604007 "Complete blood count"
+* code = $sct#1022441000000101 "FBC - full blood count"
 * subject = Reference(PatientOctaviaCHISLETT)
 * authoredOn = "2026-11-03T09:10:00Z"
 * requester = Reference(PractitionerRoleGP)
@@ -97,27 +97,22 @@ RuleSet: LaboratoryReportFBCContent
 * basedOn = Reference(LaboratoryOrderFBC)
 * status = #final
 * category = $v2-0074#HM "Hematology"
-* code.coding[+] = $sct#26604007 "Complete blood count"
-* code.coding[+] = $loinc#58410-2 "CBC panel - Blood by Automated count"
+// Report-level code, as NHS England: the test (OBR-4) is on the ServiceRequest and the FBC test group Observation
+* code.coding[+] = $sct#721981007 "Diagnostic studies report"
+* code.coding[+] = $loinc#11502-2 "Laboratory report"
 * subject = Reference(PatientOctaviaCHISLETT)
 * effectiveDateTime = "2026-11-03T09:15:00Z"
 * issued = "2026-11-03T16:05:00Z"
 * performer = Reference(OrganizationMFT)
 * resultsInterpreter = Reference(PractitionerRoleHaematologist)
 * specimen = Reference(SpecimenFBC)
-* result[+] = Reference(ResultFBCWhiteCellCount)
-* result[+] = Reference(ResultFBCHaemoglobin)
-* result[+] = Reference(ResultFBCPlateletCount)
-* result[+] = Reference(ResultFBCRedCellCount)
-* result[+] = Reference(ResultFBCHaematocrit)
-* result[+] = Reference(ResultFBCMeanCellVolume)
-* result[+] = Reference(ResultFBCMeanCellHaemoglobin)
+* result = Reference(ResultFBC)
 * conclusion = "Mild anaemia with low white cell count. Suggest repeat in 4 weeks."
 
 Instance: LaboratoryReportFBC
 InstanceOf: LaboratoryReport
 Title: "Laboratory Report - Full blood count"
-Description: "HL7 v2 `OBR|1|GP-ORD-000123^GPSYSTEM|26H012345^LIMS|26604007^Complete blood count^SCT|||20261103091500|...|20261103160500|||F` with seven OBX results. Order Results Management [LAB-3]."
+Description: "HL7 v2 ORU_R01 PATIENT_RESULT with one OBR `OBR|1|GP-ORD-000123^GPSYSTEM|26H012345^LIMS|1022441000000101^FBC - full blood count^SCT|||20261103091500|...|20261103160500||HM|F` (the [test group](Observation-ResultFBC.html)) and seven OBX results. Order Results Management [LAB-3]."
 Usage: #example
 * insert LaboratoryReportFBCContent
 
@@ -126,13 +121,36 @@ InstanceOf: LaboratoryReport
 Title: "Laboratory Report - Full blood count (in a FHIR Document)"
 Description: "The same report as it appears in the [FHIR Document](Bundle-LaboratoryReportDocumentFBC.html): it also conforms to HL7 Europe DiagnosticReport-eu-lab, which links the report to its Composition with the R5 `DiagnosticReport.composition` extension."
 Usage: #inline
-* meta.profile[+] = "https://fhir.nwgenomics.nhs.uk/PaLM/StructureDefinition/LaboratoryReport"
+* meta.profile[+] = "https://examplesihe.org.uk/StructureDefinition/LaboratoryReport"
 * meta.profile[+] = "http://hl7.eu/fhir/laboratory/StructureDefinition/DiagnosticReport-eu-lab"
 * id = "LaboratoryReportFBCDocument"
 * extension[DiagnosticReportCompositionR5].valueReference = Reference(Composition/CompositionFBC)
 * insert LaboratoryReportFBCContent
 
-// Results
+// Results - the FBC test group (the OBR) and its seven results (the OBX)
+
+Instance: ResultFBC
+InstanceOf: LaboratoryResult
+Title: "Laboratory Result - FBC (test group)"
+Description: "The full blood count test group - HL7 v2 `OBR|1|...|1022441000000101^FBC - full blood count^SCT|...`. An organizer: no value, its results are `hasMember` (the OBX)."
+Usage: #example
+* status = #final
+* category[laboratory] = $obs-cat#laboratory
+* code = $sct#1022441000000101 "FBC - full blood count"
+* subject = Reference(PatientOctaviaCHISLETT)
+* basedOn = Reference(LaboratoryOrderFBC)
+* effectiveDateTime = "2026-11-03T09:15:00Z"
+* issued = "2026-11-03T16:05:00Z"
+* performer = Reference(OrganizationMFT)
+* specimen = Reference(SpecimenFBC)
+* hasMember[+] = Reference(ResultFBCWhiteCellCount)
+* hasMember[+] = Reference(ResultFBCHaemoglobin)
+* hasMember[+] = Reference(ResultFBCPlateletCount)
+* hasMember[+] = Reference(ResultFBCRedCellCount)
+* hasMember[+] = Reference(ResultFBCHaematocrit)
+* hasMember[+] = Reference(ResultFBCMeanCellVolume)
+* hasMember[+] = Reference(ResultFBCMeanCellHaemoglobin)
+
 
 RuleSet: FBCResult(sctCode, sctDisplay, loincCode, loincDisplay)
 * status = #final

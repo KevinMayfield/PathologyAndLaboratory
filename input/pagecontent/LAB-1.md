@@ -63,7 +63,7 @@ PID|1||633^^^R0A^MR~9449305552^^^NHS^NH||CHISLETT^Octavia^^^Miss||20080920|F|||1
 PV1|1|O|^^^^^^^^Example Surgery^A12345|||||G1234567^GREEN^Alex^^^Dr^^^GMP^^^^DN
 ORC|NW|GP-ORD-000123^GPSYSTEM||GP-REQ-000045^GPSYSTEM|||||20261103091000|||G1234567^GREEN^Alex^^^Dr^^^GMP^^^^DN|||||||||Example Surgery^^^^^^^^^A12345
 TQ1|1||||||||R^Routine^HL70485
-OBR|1|GP-ORD-000123^GPSYSTEM||26604007^Complete blood count^SCT||||||||||||G1234567^GREEN^Alex^^^Dr^^^GMP^^^^DN|||||||||||||||^Tiredness
+OBR|1|GP-ORD-000123^GPSYSTEM||1022441000000101^FBC - full blood count^SCT||||||||||||G1234567^GREEN^Alex^^^Dr^^^GMP^^^^DN|||||||||||||||^Tiredness
 NTE|1|P|Tired all the time for 3 months. ? anaemia
 SPM|1|GP-SPC-000123&GPSYSTEM||119297000^Blood specimen^SCT|||||||||||||20261103091500
 ```

@@ -4,7 +4,7 @@
 // (FHIR to HL7 v2) uses the same rows read right to left.
 
 RuleSet: ConceptMapHeader(id, name, title, source, target)
-* url = "https://fhir.nwgenomics.nhs.uk/PaLM/ConceptMap/{id}"
+* url = "https://examplesihe.org.uk/ConceptMap/{id}"
 * name = "{name}"
 * title = "{title}"
 * status = #draft

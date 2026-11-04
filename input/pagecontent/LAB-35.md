@@ -13,6 +13,17 @@ cancel it. See [Inter-Laboratory Workflow (ILW)](ILW.html).
 - [IHE PaLM TF-2](https://www.ihe.net/resources/technical_frameworks/#PaLM) - Sub-order Management [LAB-35]
 - [NW GMSA - Inter Laboratory Workflow (ILW)](https://nw-gmsa.github.io/en/ILW.html) - distributed WGS sub-orders use the same transaction
 
+<div class="alert alert-info" role="alert">
+<b>In England</b> laboratory to laboratory requests and results often go through
+<b>NPEx</b>, the National Pathology Exchange - now marketed as <b>Labgnostic</b>, provided by
+X-Lab Ltd and hosted with The Health Informatics Service (THIS) as a national NHS service since
+2010. Each LIMS connects once to the exchange (rather than to every other laboratory), and
+the exchange carries the sub-order ([LAB-35](LAB-35.html)) and its results
+([LAB-36](LAB-36.html)). The identifiers, codes and content rules on these pages still apply
+to what each LIMS sends to and receives from the exchange. Message formats and onboarding are
+agreed with the provider (<b>To confirm</b> which HL7 v2 messages and versions NPEx uses).
+</div>
+
 ### Interaction
 
 ```mermaid

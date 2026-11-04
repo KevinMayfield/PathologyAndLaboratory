@@ -1,7 +1,7 @@
 {
   "resourceType" : "Requirements",
   "id" : "fromNarrative",
-  "url" : "https://fhir.nwgenomics.nhs.uk/PaLM/Requirements/fromNarrative",
+  "url" : "https://examplesihe.org.uk/Requirements/fromNarrative",
   "name" : "FromNarrative",
   "title" : "Narrative Conformance Statements",
   "status" : "active",

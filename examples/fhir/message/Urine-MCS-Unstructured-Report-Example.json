@@ -1,0 +1,472 @@
+{
+  "resourceType": "Bundle",
+  "id": "4da2b47d-d3c4-534b-8d72-48a12e297097",
+  "meta": {
+    "profile": [
+      "https://examplesihe.org.uk/StructureDefinition/BundleMessage"
+    ]
+  },
+  "identifier": {
+    "value": "NHSE-EX-0009"
+  },
+  "type": "message",
+  "timestamp": "2022-03-08T12:09:00+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:8100da70-e6bb-51ad-8d2d-ba73de3eb679",
+      "resource": {
+        "resourceType": "MessageHeader",
+        "id": "8100da70-e6bb-51ad-8d2d-ba73de3eb679",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/MessageHeader"
+          ],
+          "lastUpdated": "2022-03-08T12:09:00+00:00"
+        },
+        "eventCoding": {
+          "system": "http://terminology.hl7.org/CodeSystem/v2-0003",
+          "code": "R01",
+          "display": "ORU/ACK - Unsolicited transmission of an observation message"
+        },
+        "destination": [
+          {
+            "name": "GPSYSTEM",
+            "endpoint": "urn:hl7-v2:GPSYSTEM",
+            "receiver": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "B82033"
+              }
+            }
+          }
+        ],
+        "sender": {
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "Y8J7D"
+          }
+        },
+        "source": {
+          "name": "LIMS",
+          "endpoint": "urn:hl7-v2:LIMS"
+        },
+        "focus": [
+          {
+            "reference": "urn:uuid:a11b0a76-81f5-5a71-ac29-7ae5f3d3d90c"
+          }
+        ],
+        "definition": "https://examplesihe.org.uk/MessageDefinition/laboratory-result"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ce95bd35-3fbe-5e16-8275-54a730d8ee8b",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "ce95bd35-3fbe-5e16-8275-54a730d8ee8b",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/Patient"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "https://examplesihe.org.uk/Id/mrn/RCB",
+            "value": "RCB6052841",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "RCB"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PI"
+                }
+              ]
+            },
+            "system": "https://examplesihe.org.uk/Id/patient-internal/Y8J7D",
+            "value": "Y8J7D0592374",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "NH"
+                }
+              ]
+            },
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999549"
+          }
+        ],
+        "name": [
+          {
+            "family": "EDITESTPATIENT",
+            "given": [
+              "NINE"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "2002-02-02",
+        "address": [
+          {
+            "postalCode": "EX1 2SS"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:84c94bb1-4336-5607-9124-6b82052db22a",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "84c94bb1-4336-5607-9124-6b82052db22a",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "practitioner": {
+          "type": "Practitioner",
+          "identifier": {
+            "system": "https://fhir.hl7.org.uk/Id/gmc-number",
+            "value": "C1008215"
+          },
+          "display": "Dr Gale GASKELL"
+        },
+        "organization": {
+          "type": "Organization",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "B82033"
+          },
+          "display": "PICKERING MEDICAL PRACTICE"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1e5cda28-2dc4-522e-b44e-8d744ffb1bb6",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "1e5cda28-2dc4-522e-b44e-8d744ffb1bb6",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/LaboratoryOrder"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PLAC"
+                }
+              ]
+            },
+            "system": "http://B82033-pickeringmedicalpractice.com/labrequest",
+            "value": "REQ-20220221-000018",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "B82033"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "FILL"
+                }
+              ]
+            },
+            "system": "http://Y8J7D-pathlab001.com/report",
+            "value": "REP-20220225-006301",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "995581000000104",
+              "display": "Urinary microscopy, culture and sensitivities"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ce95bd35-3fbe-5e16-8275-54a730d8ee8b",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999549"
+          }
+        },
+        "requester": {
+          "reference": "urn:uuid:84c94bb1-4336-5607-9124-6b82052db22a"
+        },
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001"
+          }
+        ],
+        "authoredOn": "2022-02-21T10:29:00+00:00",
+        "specimen": [
+          {
+            "reference": "urn:uuid:94faba98-45af-533f-8368-d8e0f9d6f5a0"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:94faba98-45af-533f-8368-d8e0f9d6f5a0",
+      "resource": {
+        "resourceType": "Specimen",
+        "id": "94faba98-45af-533f-8368-d8e0f9d6f5a0",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/Specimen"
+          ]
+        },
+        "status": "available",
+        "type": {
+          "text": "Urine specimen"
+        },
+        "subject": {
+          "reference": "urn:uuid:ce95bd35-3fbe-5e16-8275-54a730d8ee8b",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999549"
+          }
+        },
+        "request": [
+          {
+            "reference": "urn:uuid:1e5cda28-2dc4-522e-b44e-8d744ffb1bb6"
+          }
+        ],
+        "collection": {
+          "collectedDateTime": "2022-02-21T11:07:00+00:00"
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PLAC"
+                }
+              ]
+            },
+            "system": "http://B82033-pickeringmedicalpractice.com/specimen",
+            "value": "SPC-REQ-20220221-000024"
+          }
+        ],
+        "accessionIdentifier": {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "ACSN"
+              }
+            ]
+          },
+          "system": "http://Y8J7D-pathlab001.com/specimen",
+          "value": "SPC-Lab-20220221-004306",
+          "assigner": {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            }
+          }
+        },
+        "receivedTime": "2022-02-21T14:58:00+00:00"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:15604bfd-37f1-5404-bb09-45c3950eac21",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "15604bfd-37f1-5404-bb09-45c3950eac21",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/LaboratoryResult"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:1e5cda28-2dc4-522e-b44e-8d744ffb1bb6"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "995581000000104",
+              "display": "Urinary microscopy, culture and sensitivities"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ce95bd35-3fbe-5e16-8275-54a730d8ee8b",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999549"
+          }
+        },
+        "effectiveDateTime": "2022-02-21T11:07:00+00:00",
+        "issued": "2022-02-25T13:47:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001"
+          }
+        ],
+        "valueString": "Microscopy\nCasts  None seen\nWhite cells  >35 x10*6/L\nRed cells  10-35 x10*6/L\nEpithelial cells  +\n\nCulture\n1. Staphylococcus aureus   Scanty growth\n\nSensitivities  1\nFlucloxacillin   S\nTrimethoprim  S\nNitrofurantoin  R",
+        "specimen": {
+          "reference": "urn:uuid:94faba98-45af-533f-8368-d8e0f9d6f5a0"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a11b0a76-81f5-5a71-ac29-7ae5f3d3d90c",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "a11b0a76-81f5-5a71-ac29-7ae5f3d3d90c",
+        "meta": {
+          "profile": [
+            "https://examplesihe.org.uk/StructureDefinition/LaboratoryReport"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "FILL"
+                }
+              ]
+            },
+            "system": "http://Y8J7D-pathlab001.com/report",
+            "value": "REP-20220225-006301",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          }
+        ],
+        "basedOn": [
+          {
+            "reference": "urn:uuid:1e5cda28-2dc4-522e-b44e-8d744ffb1bb6"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                "code": "MB",
+                "display": "Microbiology"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "721981007",
+              "display": "Diagnostic studies report"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "11502-2",
+              "display": "Laboratory report"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ce95bd35-3fbe-5e16-8275-54a730d8ee8b",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999549"
+          }
+        },
+        "effectiveDateTime": "2022-02-21T11:07:00+00:00",
+        "issued": "2022-02-25T13:47:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001"
+          }
+        ],
+        "specimen": [
+          {
+            "reference": "urn:uuid:94faba98-45af-533f-8368-d8e0f9d6f5a0"
+          }
+        ],
+        "result": [
+          {
+            "reference": "urn:uuid:15604bfd-37f1-5404-bb09-45c3950eac21"
+          }
+        ],
+        "conclusion": "Likely to be clinically significant."
+      }
+    }
+  ]
+}

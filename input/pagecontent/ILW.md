@@ -23,9 +23,21 @@ coming back. The Requester stays responsible for the order: it reports the resul
   different LIMS (or different instances), work moves between them as sub-orders
 - **Specialist and reference laboratories** - tests a laboratory does not offer are
   referred to another NHS or independent laboratory, for example specialist
-  immunology, rare metabolic tests or reference microbiology
+  immunology, rare metabolic tests or reference microbiology - often through NPEx
+  (Labgnostic), see below
 - **Genomics** - a pathology laboratory sending a specimen to a Genomic Laboratory Hub
   (see the [NW GMSA FHIR IG](https://nw-gmsa.github.io/en/))
+
+<div class="alert alert-info" role="alert">
+<b>In England</b> laboratory to laboratory requests and results often go through
+<b>NPEx</b>, the National Pathology Exchange - now marketed as <b>Labgnostic</b>, provided by
+X-Lab Ltd and hosted with The Health Informatics Service (THIS) as a national NHS service since
+2010. Each LIMS connects once to the exchange (rather than to every other laboratory), and
+the exchange carries the sub-order ([LAB-35](LAB-35.html)) and its results
+([LAB-36](LAB-36.html)). The identifiers, codes and content rules on these pages still apply
+to what each LIMS sends to and receives from the exchange. Message formats and onboarding are
+agreed with the provider (<b>To confirm</b> which HL7 v2 messages and versions NPEx uses).
+</div>
 
 ### Process Flow
 

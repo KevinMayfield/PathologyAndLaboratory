@@ -25,11 +25,14 @@ different settings.
 
 | System | Role in this guide |
 |---|---|
-| Pathology middleware (results distribution) | Receives results from one or more LIMS and distributes them - historically as Pathology Messaging EDIFACT (MEDRPT) to GP systems, increasingly as HL7 v2 and FHIR. The *laboratory middleware system* in the NHS England [Pathology Laboratory Reporting API](PathologyReportingAPI.html) |
+| GP order communications (order comms) | The Order Placer for GP requests, and the system that returns results to the practice. In practice the NHS England [Pathology Laboratory Reporting API](PathologyReportingAPI.html)'s *laboratory middleware system* is likely to be this system: it receives `ORU^R01` from the LIMS and sends the FHIR Document to the API |
+| Trust Integration Engine (TIE) | The middleware inside a trust or pathology network. Routes LIMS messages to the EPR, to order comms (HL7 v2 `ORU^R01`) and to shared care records, and is often where HL7 v2 to FHIR conversion happens - see [Mapping](mapping.html). Not the same thing as the NHS England "laboratory middleware system" |
+| Results distribution middleware | Older pattern: receives results from one or more LIMS and sends them to GP systems as Pathology Messaging EDIFACT (MEDRPT) |
+| NPEx / Labgnostic | The National Pathology Exchange - laboratory to laboratory requests and results. See [ILW](ILW.html) |
+| Regional shared care record | For example the Yorkshire and Humber Care Record (YHCR) or an IHE XDS community - see [Results Distribution](ResultsDistribution.html#regional-shared-care-records) |
 | NHS England Pathology Laboratory Reporting API | Validates a laboratory report (FHIR Document) and stores it in Patient Data Manager |
 | Patient Data Manager (PDM) | National FHIR store for the reports and their acknowledgements |
 | Multicast Notification Service (MNS) | Publishes the *test result stored* event to subscribed GP systems |
-| Integration engine (TIE) | Routes and converts messages inside a trust or network - often the place where HL7 v2 to FHIR conversion happens, see [Mapping](mapping.html) |
 {:.grid}
 
 ### Actors and Systems Together
@@ -37,13 +40,13 @@ different settings.
 ```mermaid
 flowchart LR
     subgraph Requester[Requesting organisation]
-        OP[Order Placer<br/>EPR / order comms / GP system]
+        OP[Order Placer<br/>EPR / GP order comms]
         ORT[Order Result Tracker<br/>EPR / GP system]
     end
     subgraph Laboratory[Laboratory - trust or pathology network]
         OF[Order Filler<br/>LIMS]
         AM[Automation Manager<br/>LIMS middleware]
-        MW[Results distribution<br/>middleware]
+        TIE[Trust Integration<br/>Engine]
     end
     subgraph Reference[Reference laboratory]
         SC[Subcontractor<br/>LIMS]
@@ -59,8 +62,9 @@ flowchart LR
     OF -- "LAB-35 OML^O21" --> SC
     SC -- "LAB-36 ORU^R01" --> OF
     OF --- AM
-    OF --> MW
-    MW -- "FHIR Document" --> API
+    OF -- "ORU^R01" --> TIE
+    TIE -- "ORU^R01" --> OP
+    OP -- "FHIR Document<br/>(GP order comms)" --> API
     API --> PDM
     API --> MNS
     MNS -- "event" --> ORT

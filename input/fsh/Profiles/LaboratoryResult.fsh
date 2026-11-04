@@ -3,7 +3,7 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             LaboratoryResult
 Title:          "Laboratory Result"
 Description:    """
-`Diagnostic - Laboratory` A single laboratory result (HL7 v2 OBX). NHS England's Pathology Laboratory Reporting API uses its own `England-Observation-Lab-Pathology` profile, which is also derived from HL7 Europe Laboratory.
+`Diagnostic - Laboratory` A laboratory result (HL7 v2 OBX), or a test group (HL7 v2 OBR with several OBX) acting as an organizer whose `hasMember` are its results - for example the full blood count. NHS England marks organizers with the `http://hl7.org/fhir/6.0/StructureDefinition/extension-Observation.organizer` extension. NHS England's Pathology Laboratory Reporting API uses its own `England-Observation-Lab-Pathology` profile, which is also derived from HL7 Europe Laboratory.
 """
 
 * identifier MS
@@ -53,4 +53,4 @@ Description:    """
 * referenceRange ^short = "HL7 v2 OBX-7 References Range"
 * referenceRange.text ^short = "HL7 v2 OBX-7 as sent, where it cannot be parsed into low/high"
 
-* hasMember ^short = "Related results grouped by HL7 v2 OBX-4 Observation Sub-ID"
+* hasMember ^short = "Results of a test group - the OBX under the OBR (or grouped by HL7 v2 OBX-4 Observation Sub-ID)"

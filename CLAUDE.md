@@ -4,7 +4,8 @@ Draft FHIR Implementation Guide: an **England Pathology and Laboratory Medicine
 (PaLM) Technical Framework** - the IHE PaLM Technical Framework localised for
 England, covering HL7 v2.5.1 and HL7 FHIR R4 and how to map between them. Like the
 NW GMSA FHIR IG (`../FHIRGenomics`, https://nw-gmsa.github.io/en/) it supports both
-HL7 v2 and FHIR.
+HL7 v2 and FHIR. Publisher: Kevin Mayfield. Package id `uk.org.examplesihe.palm`,
+canonical `https://examplesihe.org.uk` - do not use `fhir.nwgenomics.nhs.uk` URLs.
 
 ## Scope
 
@@ -29,6 +30,14 @@ HL7 v2 and FHIR.
   Design, Volume 2 Interactions (LAB-1, LAB-2, LAB-3, LAB-35, LAB-36, NHS England
   API), Volume 3 Data Models, Volume 4 HL7 v2 and Mapping (`hl7v2.md`, `mapping.md`).
 - A new page must be added to both `pages:` and `menu:` in `sushi-config.yaml`.
+- `scripts/nhse_document_to_oru.py` downloads the NHS England package
+  (`fhir.r4.nhsengland.pathology`, into `.cache/`) and writes the `ORU^R01` versions of its
+  examples to `examples/hl7v2/ORU_R01/` and the page `input/pagecontent/NHSEnglandExamples.md`
+  (generated - edit the script, not the page).
+- `notebooks/01-oru-r01-to-fhir-message.ipynb` (ORU^R01 -> FHIR Message,
+  `examples/fhir/message/`) and `notebooks/02-fhir-message-to-fhir-document.ipynb` (-> NHS
+  England FHIR Document, `examples/fhir/document/`). Validation cells need
+  `VALIDATOR_JAR` (or `./validator_cli.jar`, gitignored) and `output/package.tgz`.
 - Research notes and open questions that should not be published:
   `notes/research.md` (outside `input/`, so the IG Publisher ignores it).
 
@@ -43,6 +52,12 @@ HL7 v2 and FHIR.
   `DiagnosticReport-eu-lab`.
 - HL7 v2 example messages on LAB-1 / LAB-3 must stay consistent with the FHIR
   examples in `input/fsh/Examples/`.
+- Report model (as NHS England): one DiagnosticReport per report (OBRs sharing OBR-3),
+  `code` = 721981007 / LOINC 11502-2; each OBR is a ServiceRequest plus a test group
+  Observation (`hasMember` the OBX), or the single result when it has one OBX.
+- HL7 v2 identifiers are EI `value^namespace` with **no URI** (EI-3/EI-4): the
+  `Identifier.system` is assigned by the receiver from an agreed table.
+- Recommend DAPB4101 content across England, not only to the NHS England API / GP systems.
 - Check SNOMED CT (UK Edition, `version=http://snomed.info/sct/83821000000107`) and
   LOINC codes on tx.fhir.org (`CodeSystem/$lookup`) before using them.
 - Cite sources with links. Mark anything unverified or undecided as **Open** or

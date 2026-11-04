@@ -30,7 +30,14 @@ There are four levels:
 
 The Bundle `identifier` is MSH-10 and `timestamp` is MSH-7. Each HL7 v2 message becomes
 **one** FHIR Message; resources referenced from several segments (the Patient, the
-requesting clinician, the laboratory) appear once in the Bundle.
+requester's PractitionerRole) appear once in the Bundle.
+
+**Practitioners and organisations are identifier references in a FHIR Message.** HL7 v2
+carries only their codes and names - the ODS code (XON-10, MSH-4 / MSH-6, PL-10) and the GMC,
+GMP or NMC code (XCN-1 with XCN-9). The FHIR Message mirrors that: a `Reference` with `type`,
+`identifier` and `display`, and no Practitioner or Organization resource in the Bundle. When
+a FHIR Document is built ([below](#fhir-message-to-fhir-document)) they are looked up and
+added, because the NHS England API needs them.
 
 ### Segment and Field Level
 
@@ -56,11 +63,23 @@ each profile's **Mappings** tab.
 
 #### Rules
 
-- **One DiagnosticReport per OBR** (in ORU_R01). Each OBR's OBX become the
-  `DiagnosticReport.result` Observations
+- **One DiagnosticReport per report**. In ORU_R01 the OBRs of a PATIENT_RESULT that share a
+  Filler Order Number (OBR-3) are one report - one DiagnosticReport, as NHS England requires
+  for its documents. `DiagnosticReport.code` is the report type (SNOMED CT `721981007`
+  Diagnostic studies report, LOINC `11502-2`), not OBR-4
+- **Each OBR is a test group**. When an OBR has several OBX it becomes an Observation with
+  OBR-4 as `code` and the OBX as `hasMember` - NHS England calls this an *organizer* (for
+  example the FBC, LFT, U&E). When an OBR has a single OBX (a single test, such as HbA1c),
+  that result Observation is used directly. Either way it is one `DiagnosticReport.result`
 - **One ServiceRequest per ORC/OBR pair**. In ORU_R01 the ServiceRequest carries the
-  order identifiers (ORC-2, ORC-3, ORC-4) and the requester; `DiagnosticReport.basedOn`
-  references it
+  order identifiers (ORC-2, ORC-3, ORC-4), OBR-4 as `code`, and the requester;
+  `DiagnosticReport.basedOn` and each Observation's `basedOn` reference it
+- **Identifier systems are assigned by the receiver**. The LIMS sends EI `value^namespace`
+  (for example `REQ-20220307-000046-001^B82033`); the FHIR `Identifier.system` (a URI) is
+  not known at that stage of the pipeline and **SHOULD NOT** be expected in the HL7 v2
+  message. The converter - usually the integration engine - assigns it from an agreed table
+  of *field* (placer order, report, placer specimen, accession) and *namespace* to system,
+  and keeps the namespace as the `assigner` (ODS code)
 - **Placer and filler numbers keep their meaning**. Do not copy ORC-3 into a `PLAC`
   identifier or ORC-2 into a `FILL` identifier
 - **Fixed resource identity**. A corrected result (OBR-25 / OBX-11 = `C`) **SHALL**
@@ -70,10 +89,10 @@ each profile's **Mappings** tab.
   a report
 - **Report comments**. NTE after an OBR in ORU_R01 become `DiagnosticReport.conclusion`
   (several NTE are joined with new lines); NTE after an OBX become `Observation.note`
-- **Text-only reports**. Where a laboratory sends the whole report as OBX of type `TX` /
-  `FT` (one line per OBX, as in many microbiology reports), join them into
-  `DiagnosticReport.presentedForm` (`text/plain`) or `conclusion` rather than one
-  Observation per line
+- **Text-only reports**. A report sent as text - one OBX of type `FT` with `\.br\` line
+  breaks, or several `TX` OBX with the same OBX-3, one per line as in many microbiology
+  reports - becomes **one** Observation with the lines joined in `valueString`, as in the
+  NHS England unstructured examples (GTT, urine MCS), not one Observation per line
 - **MSH is not clinical**. Do not derive the patient's assigning authority, the
   requester or the performer from MSH-4 / MSH-6 alone
 
@@ -126,7 +145,7 @@ Join split `ED` OBX (same OBX-3, consecutive) before decoding.
 | HL7 v2 | FHIR | Notes |
 |---|---|---|
 | CX | Identifier | [CX](hl7v2.html#cx). CX-4 `NHS` → `system` `https://fhir.nhs.uk/Id/nhs-number`; CX-5 → `type` (v2-0203) |
-| EI | Identifier | [EI](hl7v2.html#ei). EI-2 → `system` (one URI per assigning application, agreed per interface) |
+| EI | Identifier | [EI](hl7v2.html#ei). EI-1 → `value`; EI-2 namespace → `assigner` and, through an agreed table, `system` (not sent in HL7 v2) |
 | XCN | Reference(Practitioner) / PractitionerRole | [XCN](hl7v2.html#xcn). XCN-9 → `identifier.system` |
 | XON | Reference(Organization) | [XON](hl7v2.html#xon). XON-10 → ODS `identifier` |
 | XPN | HumanName | |
@@ -166,8 +185,12 @@ The same tables read right to left. Points to watch:
 - **Several FHIR codes map to one v2 code, or none**. Use the ConceptMap rows with
   `equivalence` `equivalent` first; `registered` → OBR-25 `I` (not `O`), `partial` → `A`,
   `preliminary` → `P`, `amended` → `C`, `entered-in-error` → OBX-11 `W`
-- **One DiagnosticReport → one OBR** with its `result` Observations as OBX in order;
-  OBX-1 numbered from 1 for each OBR
+- **One DiagnosticReport → one PATIENT_RESULT**: one ORC/OBR per ServiceRequest
+  (`basedOn`), all with OBR-3 = `DiagnosticReport.identifier`. A test group Observation
+  (with `hasMember`) becomes the OBR (its `code` → OBR-4) and its members the OBX; a single
+  result is an OBR with one OBX. OBX-1 is numbered from 1 for each OBR
+- **Do not send `Identifier.system`** in EI-3 / EI-4 - send `value^namespace`, the receiver
+  assigns the system
 - **Identifiers**. `ServiceRequest.identifier` (`PLAC`) → ORC-2 / OBR-2, (`FILL`) → ORC-3 /
   OBR-3; `Patient.identifier` → PID-3 repeats; an NHS Number **SHALL** be sent as
   `<number>^^^NHS^NH`
@@ -185,23 +208,40 @@ The [NHS England Pathology Laboratory Reporting API](PathologyReportingAPI.html)
 FHIR Document. From a [Laboratory Result (R01)](MessageDefinition-laboratory-result.html)
 message (or directly from an ORU_R01), for **each** DiagnosticReport:
 
-1. Create a [Laboratory Report Composition](StructureDefinition-LaboratoryReportComposition.html):
+1. Look up the Practitioners and Organizations referenced by identifier and add them as
+   resources: organisations from the NHS England Organisation Data Service - the
+   [ODS APIs](https://digital.nhs.uk/services/organisation-data-service/organisation-data-service-apis)
+   (ORD, or the ODS FHIR API) or the
+   [ODS CSV downloads](https://digital.nhs.uk/services/organisation-data-service/data-search-and-export/csv-downloads)
+   (`epraccur.csv` GP practices, `etr.csv` trusts); GP practitioners (GMP codes) from the ODS
+   download `egpcur.csv`; other clinicians from the system's own practitioner directory
+2. Create a [Laboratory Report Composition](StructureDefinition-LaboratoryReportComposition.html):
    `subject` = the Patient, with `subject.identifier` = the NHS Number; `identifier` =
-   the DiagnosticReport's Filler Order Number (OBR-3); `type` LOINC `11502-2` Laboratory
-   report **and** the DiagnosticReport's code (OBR-4) - HL7 Europe requires the
-   Composition and DiagnosticReport to share an identifier and a code; `date` = `DiagnosticReport.issued`; `author` and
-   `custodian` = the performing laboratory; one `section` with a narrative and an entry
-   for the DiagnosticReport (its code from OBR-24, for example LOINC `18723-7` Hematology
-   studies for `HM`)
-2. Link the DiagnosticReport to the Composition with the R5 `DiagnosticReport.composition`
-   extension (HL7 Europe DiagnosticReport-eu-lab)
-3. Add a [Laboratory Report Provenance](StructureDefinition-LaboratoryReportProvenance.html)
+   the DiagnosticReport's Filler Order Number (OBR-3); `type` = the report type
+   (`721981007` and `11502-2`, the same as `DiagnosticReport.code` - HL7 Europe requires the
+   Composition and DiagnosticReport to share an identifier and a code); `date` =
+   `DiagnosticReport.issued`; `author`, `attester` and `custodian` = the performing
+   laboratory; **one `section` per test group** (OBR) with generated narrative and an entry
+   for its Observation - see
+   [Human Readable and Computer Processable](PathologyReportingAPI.html#human-readable-and-computer-processable)
+3. Link the DiagnosticReport to the Composition with the R5 `DiagnosticReport.composition`
+   extension (HL7 Europe DiagnosticReport-eu-lab), and mark each test group Observation with the
+   NHS England `Observation.organizer` extension
+4. Add a [Laboratory Report Provenance](StructureDefinition-LaboratoryReportProvenance.html)
    targeting the Composition, naming the sending product
-4. Put the Composition first, then the DiagnosticReport and every resource it references
+5. Put the Composition first, then the DiagnosticReport and every resource it references
    (Patient, ServiceRequest, PractitionerRole, Practitioner, Organization, Specimen,
    Observations) and the Provenance, in a Bundle of `type` `document` with a new
    `identifier` and `timestamp`
-5. Drop the MessageHeader
+6. Set the NHS England `meta.profile` on every resource and drop the MessageHeader
+
+Worked through for the NHS England examples in notebook
+[02-fhir-message-to-fhir-document](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/notebooks/02-fhir-message-to-fhir-document.ipynb);
+the HL7 v2 to FHIR Message step is notebook
+[01-oru-r01-to-fhir-message](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/notebooks/01-oru-r01-to-fhir-message.ipynb),
+and the reverse (FHIR Document to `ORU^R01`) is
+[`scripts/nhse_document_to_oru.py`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/scripts/nhse_document_to_oru.py)
+- see [NHS England Examples](NHSEnglandExamples.html).
 
 ### Worked Example
 
@@ -213,7 +253,8 @@ The [LAB-3 example](LAB-3.html#example) `ORU^R01` and its FHIR equivalents:
 | PID | [Patient](Patient-PatientOctaviaCHISLETT.html) | the same Patient |
 | PV1-3, PV1-8, ORC-12, ORC-21 | [PractitionerRole](PractitionerRole-PractitionerRoleGP.html), [Practitioner](Practitioner-PractitionerGP.html), [Organization](Organization-OrganizationExampleSurgery.html) | the same |
 | ORC | [Laboratory Order](ServiceRequest-LaboratoryOrderFBC.html) | the same |
-| OBR, NTE | [Laboratory Report](DiagnosticReport-LaboratoryReportFBC.html) | the same report, plus the Composition link |
+| OBR-3, OBR-22, OBR-25, NTE | [Laboratory Report](DiagnosticReport-LaboratoryReportFBC.html) | the same report, plus the Composition link |
+| OBR (test group, OBR-4) | [FBC test group](Observation-ResultFBC.html) | the same |
 | OBR-32 | [PractitionerRole](PractitionerRole-PractitionerRoleHaematologist.html) | the same |
 | OBX-1 to OBX-7 | [White cell count](Observation-ResultFBCWhiteCellCount.html), [Haemoglobin](Observation-ResultFBCHaemoglobin.html), [Platelets](Observation-ResultFBCPlateletCount.html), [Red cell count](Observation-ResultFBCRedCellCount.html), [Haematocrit](Observation-ResultFBCHaematocrit.html), [MCV](Observation-ResultFBCMeanCellVolume.html), [MCH](Observation-ResultFBCMeanCellHaemoglobin.html) | the same |
 | OBX-23 | [Organization - MFT](Organization-OrganizationMFT.html) | the same |

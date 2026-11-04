@@ -39,6 +39,14 @@ In scope:
   primary care (LIMS to GP system), and between laboratories (pathology networks and
   reference laboratories)
 
+<div class="alert alert-info" role="alert">
+<b>Recommendation.</b> Apply the content of
+<a href="https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dapb4101-pathology-and-laboratory-medicine-reporting-information-standard">DAPB4101</a>
+(SNOMED CT PaLM codes, units, report structure) to <b>all</b> laboratory reporting in England,
+not only to the NHS England API and GP systems - see
+<a href="PaLM.html#what-england-adds">IHE PaLM in England</a>.
+</div>
+
 Out of scope (for now):
 
 - Cellular pathology and genomics reports - see the
@@ -67,6 +75,8 @@ Out of scope (for now):
 - [Sub-order Management [LAB-35]](LAB-35.html), [Sub-order Results Delivery [LAB-36]](LAB-36.html)
 - [NHS England Pathology Laboratory Reporting API](PathologyReportingAPI.html) - the
   national FHIR API, Patient Data Manager and the Multicast Notification Service event
+- [NHS England Examples as HL7 v2](NHSEnglandExamples.html) - the NHS England Pathology FHIR IG
+  examples as `ORU^R01`
 
 **Data Models (Volume 3)**
 
@@ -80,6 +90,12 @@ Out of scope (for now):
   MSH, PID, PV1, ORC, OBR, TQ1, NTE, OBX, SPM and MSA
 - [Mapping HL7 v2 and FHIR](mapping.html) - message, segment, data type and
   vocabulary mappings in both directions
+
+**Notebooks** (in the [GitHub repository](https://github.com/KevinMayfield/PathologyAndLaboratory/tree/main/notebooks))
+
+- `01-oru-r01-to-fhir-message.ipynb` - converts the `ORU^R01` examples into FHIR Messages
+- `02-fhir-message-to-fhir-document.ipynb` - converts the FHIR Messages into FHIR Documents for
+  the NHS England API, including the human readable narrative
 
 ### Example
 

@@ -12,7 +12,7 @@ Parent:         http://hl7.eu/fhir/base/StructureDefinition/diagnosticReport-eu-
 Id:             LaboratoryReport
 Title:          "Laboratory Report"
 Description:    """
-`Diagnostic - Laboratory` A laboratory report - the IHE PaLM *Order Result*. One DiagnosticReport per reported test or panel (HL7 v2 OBR in ORU_R01), grouping its results (OBX).
+`Diagnostic - Laboratory` A laboratory report - the IHE PaLM *Order Result*. One DiagnosticReport per report: in HL7 v2 ORU_R01, the OBR segments of a PATIENT_RESULT that share a Filler Order Number (OBR-3). Each OBR is a test group - a [Laboratory Result](StructureDefinition-LaboratoryResult.html) organizer whose `hasMember` are the OBX results - or, for a single test, the result itself. This is the pattern used by the NHS England Pathology FHIR IG.
 """
 
 * identifier 1..* MS
@@ -25,11 +25,11 @@ Description:    """
 * identifier contains
     fillerOrderNumber 0..1 MS
 * identifier[fillerOrderNumber] only ReportIdentifier
-* identifier[fillerOrderNumber] ^short = "Filler Order Number / report number assigned by the laboratory (HL7 v2 OBR-3)"
+* identifier[fillerOrderNumber] ^short = "Report (laboratory) number assigned by the Order Filler - HL7 v2 OBR-3, shared by the OBRs of the report"
 
 * basedOn 0..* MS
 * basedOn only Reference(LaboratoryOrder)
-* basedOn ^short = "The order (HL7 v2 ORC-2 / OBR-2 Placer Order Number)"
+* basedOn ^short = "The orders reported - one per OBR (HL7 v2 ORC-2 / OBR-2 Placer Order Number)"
 
 * status MS
 * status ^short = "HL7 v2 OBR-25 Result Status - see ConceptMap v2-0123 to DiagnosticReport.status"
@@ -39,7 +39,7 @@ Description:    """
 * category ^short = "Laboratory discipline (HL7 v2 OBR-24 Diagnostic Serv Sect ID)"
 
 * code MS
-* code ^short = "Test or panel reported (HL7 v2 OBR-4 Universal Service Identifier)"
+* code ^short = "Report type: SNOMED CT 721981007 Diagnostic studies report (NHS England), LOINC 11502-2 Laboratory report. The tests reported (HL7 v2 OBR-4) are ServiceRequest.code and the result Observation.code"
 
 * subject 1..1 MS
 * subject only Reference(Patient)
@@ -65,7 +65,7 @@ Description:    """
 
 * result 0..* MS
 * result only Reference(LaboratoryResult)
-* result ^short = "Results (HL7 v2 OBX)"
+* result ^short = "One per OBR: the test group organizer Observation, or the single result of a one-test OBR"
 
 * conclusion MS
 * conclusion ^short = "Report comment or interpretation (HL7 v2 NTE following OBR, or OBX of type TX / FT)"

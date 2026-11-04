@@ -14,11 +14,30 @@ records. This page describes the routes.
 | Route | Sender | Receiver | Format | Notes |
 |---|---|---|---|---|
 | Within a trust | LIMS | Trust EPR | HL7 v2 `ORU^R01` [LAB-3] (or FHIR Message) | The most common interface |
-| To primary care - current | Results distribution middleware | GP clinical system | Pathology Messaging EDIFACT (MEDRPT) | Being replaced by the NHS England Pathology Laboratory Reporting API |
-| To primary care - national FHIR | Laboratory middleware | NHS England Pathology Laboratory Reporting API → PDM → GP system | FHIR Document | See [NHS England Pathology Laboratory Reporting API](PathologyReportingAPI.html) |
+| To GP order comms | LIMS, through the Trust Integration Engine (TIE) | GP order comms (the Order Placer the GP used) | HL7 v2 `ORU^R01` [LAB-3] | Order comms returns the results to the practice |
+| To primary care - current | GP order comms or results distribution middleware | GP clinical system | Pathology Messaging EDIFACT (MEDRPT) | Being replaced by the NHS England Pathology Laboratory Reporting API |
+| To primary care - national FHIR | GP order comms (the API's "laboratory middleware system") | NHS England Pathology Laboratory Reporting API → PDM → GP system | FHIR Document | See [NHS England Pathology Laboratory Reporting API](PathologyReportingAPI.html) |
 | To other laboratories | LIMS | LIMS | HL7 v2 `ORU^R01` [LAB-36] | See [ILW](ILW.html) |
-| To shared care records | LIMS or integration engine | Regional shared care record | HL7 v2 `ORU^R01` or FHIR | Often a copy of the LAB-3 feed |
+| To shared care records | LIMS or integration engine | Regional shared care record | HL7 v2 `ORU^R01`, PDF document (IHE XDS / MHD) or FHIR | Often a copy of the LAB-3 feed - see below |
 {:.grid}
+
+### Regional Shared Care Records
+
+In the north of England laboratory results are likely to be shared through a **regional
+shared care record**, rather than (or as well as) point to point. The technology differs by
+region:
+
+| Pattern | How results are shared | Notes |
+|---|---|---|
+| IHE XDS document sharing | The report as a **document** - often a PDF rendered by the LIMS or TIE - registered in an XDS registry/repository (IHE XD-LAB is the laboratory content profile) | Easy to add, but the results are not computable by the receiver. Prefer a structured document (the [FHIR Document](StructureDefinition-BundleLaboratoryReportDocument.html) of this guide, or CDA) alongside or instead of the PDF |
+| Yorkshire and Humber Care Record (YHCR) | FHIR resources published by each organisation and queried across the region | Based on the [Interweave Implementation Guide](https://fhir.interweavedigital.com/index.html) (CareConnect / FHIR STU3, with R4 profiles including `Interweave-DiagnosticReport`) |
+| Shared care record fed by HL7 v2 | A copy of the `ORU^R01` [LAB-3] feed from the TIE | The record vendor converts to its own model |
+{:.grid}
+
+For any of them the content **SHOULD** follow DAPB4101 (see
+[IHE PaLM in England](PaLM.html#what-england-adds)), so that a result in the shared care
+record is coded the same way as the one in the GP record. Where a PDF is shared it
+**SHOULD** be the same report as the structured content, not a separately produced one.
 
 ### One Content, Several Containers
 

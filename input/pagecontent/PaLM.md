@@ -47,6 +47,13 @@ NW GMSA specifications use, so this guide uses <code>ORU^R01</code> only.
 The IHE profiles say *which* messages to send. A localisation also has to say how to
 fill them in. For England this guide adds:
 
+- **Content - DAPB4101 everywhere.** The NHS England
+  [Pathology and Laboratory Medicine Reporting information standard (DAPB4101)](https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dapb4101-pathology-and-laboratory-medicine-reporting-information-standard)
+  is written for reporting to general practice. This guide **recommends** that its content -
+  SNOMED CT PaLM codes, units, report structure - is applied **across England**: LIMS to trust
+  EPR, laboratory to laboratory, to shared care records and to GP systems, in HL7 v2 as well as
+  FHIR. A result then means the same thing on every route, and moving it between routes (for
+  example `ORU^R01` to the NHS England API) changes the container, not the content
 - **Identifiers** - NHS Number (`PID-3` with assigning authority `NHS` and type `NH`),
   ODS codes for organisations (`MSH-4`, `MSH-6`, `XON-10`), GMC / NMC / HCPC / GP
   (GMP) codes for clinicians (`XCN-1` with `XCN-9`), and placer / filler order and

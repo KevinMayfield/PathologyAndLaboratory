@@ -118,8 +118,8 @@ header, populated by the Order Filler.
 |---|---|---|---|---|---|---|
 | OBR-1 | Set ID | SI | R | `1` | | - |
 | OBR-2 | Placer Order Number | [EI](#ei) | C | `GP-ORD-000123^GPSYSTEM` | Same as ORC-2. Required if the order was electronic | `ServiceRequest.identifier` (`PLAC`); `DiagnosticReport.basedOn` |
-| OBR-3 | Filler Order Number | [EI](#ei) | C | `26H012345^LIMS` | Required in ORU_R01. The laboratory number users quote | `DiagnosticReport.identifier` |
-| OBR-4 | Universal Service Identifier | CWE | R | `26604007^Complete blood count^SCT` | SNOMED CT procedure or the laboratory's test code (with a national code where one exists) | `ServiceRequest.code`, `DiagnosticReport.code` |
+| OBR-3 | Filler Order Number | [EI](#ei) | C | `26H012345^LIMS` | Required in ORU_R01. The laboratory (report) number users quote - the same on every OBR of one report | `DiagnosticReport.identifier` |
+| OBR-4 | Universal Service Identifier | CWE | R | `1022441000000101^FBC - full blood count^SCT` | The test group or test: SNOMED CT UK (PaLM) code, or the laboratory's code with the national code as the alternate | `ServiceRequest.code`; the test group `Observation.code` |
 | OBR-7 | Observation Date/Time | TS | C | `20261103091500` | Required in ORU_R01 - the specimen collection time | `DiagnosticReport.effectiveDateTime` |
 | OBR-13 | Relevant Clinical Information | ST | O | | Prefer NTE | `ServiceRequest.note` |
 | OBR-16 | Ordering Provider | [XCN](#xcn) | R | `G1234567^GREEN^Alex^^^Dr^^^GMP^^^^DN` | Same as ORC-12 | `ServiceRequest.requester` |
@@ -235,8 +235,8 @@ Entity Identifier - order numbers.
 | Component | Name | England rule | FHIR Identifier |
 |---|---|---|---|
 | EI-1 | Entity Identifier | | `value` |
-| EI-2 | Namespace ID | The assigning application (MSH-3 of the system that assigned it) | `system` (agreed URI per application) |
-| EI-3 / EI-4 | Universal ID / Type | Optional ODS code / `L,M,N` | `assigner.identifier` |
+| EI-2 | Namespace ID | The assigning organisation (ODS code) or application | `assigner.identifier` (ODS); and `system` through an agreed table |
+| EI-3 / EI-4 | Universal ID / Type | **Not used** - the FHIR `Identifier.system` URI is not known to the LIMS at this stage of the pipeline; the receiver assigns it | - |
 {:.grid}
 
 #### XCN

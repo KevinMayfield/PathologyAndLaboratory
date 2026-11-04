@@ -1,0 +1,1781 @@
+{
+  "resourceType": "Bundle",
+  "id": "7bbd712e-d110-5df1-a44c-a593ad422143",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/England/StructureDefinition/England-Bundle-Lab-Pathology|0.1.0"
+    ]
+  },
+  "identifier": {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:uuid:7bbd712e-d110-5df1-a44c-a593ad422143"
+  },
+  "type": "document",
+  "timestamp": "2022-03-08T12:09:00+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:c678e649-7cf0-585a-a74d-726ef113d86e",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "c678e649-7cf0-585a-a74d-726ef113d86e",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/laboratory/StructureDefinition/Composition-eu-lab|2.0.0"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table><tr><th>NHS Number</th><td>9999999468</td></tr><tr><th>Report number</th><td>REP-20220308-008902</td></tr><tr><th>Status</th><td>final</td></tr><tr><th>Requested by</th><td>Dr Gale GASKELL, PICKERING MEDICAL PRACTICE (B82033)</td></tr><tr><th>Laboratory</th><td>TD008362 PATH LAB 001 (Y8J7D)</td></tr><tr><th>Specimen</th><td>Venous blood specimen collected 2022-03-07T10:02:00+00:00</td></tr><tr><th>Issued</th><td>2022-03-08T14:23:00+00:00</td></tr></table></div>"
+        },
+        "identifier": {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "FILL"
+              }
+            ]
+          },
+          "system": "http://Y8J7D-pathlab001.com/report",
+          "value": "REP-20220308-008902",
+          "assigner": {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            }
+          }
+        },
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "721981007",
+              "display": "Diagnostic studies report"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "11502-2",
+              "display": "Laboratory report"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "date": "2022-03-08T14:23:00+00:00",
+        "author": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "title": "Laboratory Report",
+        "attester": [
+          {
+            "mode": "official",
+            "party": {
+              "type": "Organization",
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              },
+              "display": "TD008362 PATH LAB 001",
+              "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+            }
+          }
+        ],
+        "custodian": {
+          "type": "Organization",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "Y8J7D"
+          },
+          "display": "TD008362 PATH LAB 001",
+          "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+        },
+        "section": [
+          {
+            "title": "Liver function tests",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "1031081000000108",
+                  "display": "Liver function tests"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table><tr><th>Test</th><th>Result</th><th>Units</th><th>Reference range</th><th>Flag</th></tr><tr><td>Serum total bilirubin level</td><td>6</td><td>umol/L</td><td>&lt; 21</td><td></td></tr><tr><td>Serum albumin level</td><td>47</td><td>g/L</td><td>35 - 50</td><td></td></tr><tr><td>Serum alkaline phosphatase level</td><td>96</td><td>iu/L</td><td>30 - 130</td><td></td></tr><tr><td>Serum alanine aminotransferase level</td><td>15</td><td>iu/L</td><td>&lt; 40</td><td></td></tr></table></div>"
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:32f8a5ae-c597-54ac-b65c-2d1edfc352f2"
+              }
+            ]
+          },
+          {
+            "title": "Urea and electrolytes level",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "1000971000000107",
+                  "display": "Urea and electrolytes level"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table><tr><th>Test</th><th>Result</th><th>Units</th><th>Reference range</th><th>Flag</th></tr><tr><td>Serum urea level</td><td>3.7</td><td>mmol/L</td><td>2.5 - 7.8</td><td></td></tr><tr><td>Serum sodium level</td><td>139</td><td>mmol/L</td><td>133 - 146</td><td></td></tr><tr><td>Serum potassium level</td><td>4.7</td><td>mmol/L</td><td>3.5 - 5.3</td><td></td></tr><tr><td>Serum creatinine level</td><td>73</td><td>umol/L</td><td>59 - 104</td><td></td></tr><tr><td>eGFR (estimated glomerular filtration rate) using creatinine Chronic Kidney Disease Epidemiology Collaboration equation per 1.73 square metres</td><td>100</td><td>mL/min/1.73m2</td><td></td><td></td></tr></table><p><i>eGFR (estimated glomerular filtration rate) using creatinine Chronic Kidney Disease Epidemiology Collaboration equation per 1.73 square metres</i>: Calculated eGFR is not valid in children or pregnancy.<br/>Less accurate with acute change in creatinine (AKI).<br/>Caution with high or low muscle mass or amputation.<br/>Avoid blood sampling within 12 hours of eating meat.<br/>Ethnicity factor comment removed Dec21 NG203.<br/></p></div>"
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:91b76c07-cbc7-5a01-9b90-e6b4eea3fd80"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f4ce5504-3821-5939-8131-96727eda4722",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "f4ce5504-3821-5939-8131-96727eda4722",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/laboratory/StructureDefinition/DiagnosticReport-eu-lab|2.0.0-nhs-fix"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "FILL"
+                }
+              ]
+            },
+            "system": "http://Y8J7D-pathlab001.com/report",
+            "value": "REP-20220308-008902",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          }
+        ],
+        "basedOn": [
+          {
+            "reference": "urn:uuid:5034f823-2354-50e0-8023-1b3cf29cd7dc"
+          },
+          {
+            "reference": "urn:uuid:e1a2c957-a745-501b-880c-358c673f2013"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                "code": "CH",
+                "display": "Chemistry"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "721981007",
+              "display": "Diagnostic studies report"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "11502-2",
+              "display": "Laboratory report"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "specimen": [
+          {
+            "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+          }
+        ],
+        "result": [
+          {
+            "reference": "urn:uuid:32f8a5ae-c597-54ac-b65c-2d1edfc352f2"
+          },
+          {
+            "reference": "urn:uuid:91b76c07-cbc7-5a01-9b90-e6b4eea3fd80"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-DiagnosticReport.composition",
+            "valueReference": {
+              "reference": "urn:uuid:c678e649-7cf0-585a-a74d-726ef113d86e"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5034f823-2354-50e0-8023-1b3cf29cd7dc",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "5034f823-2354-50e0-8023-1b3cf29cd7dc",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/laboratory/StructureDefinition/ServiceRequest-eu-lab|2.0.0"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PLAC"
+                }
+              ]
+            },
+            "system": "http://B82033-pickeringmedicalpractice.com/labrequest",
+            "value": "REQ-20220307-000046-001",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "B82033"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "FILL"
+                }
+              ]
+            },
+            "system": "http://Y8J7D-pathlab001.com/report",
+            "value": "REP-20220308-008902",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1031081000000108",
+              "display": "Liver function tests"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "requester": {
+          "reference": "urn:uuid:84c94bb1-4336-5607-9124-6b82052db22a"
+        },
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "authoredOn": "2022-03-07T09:48:00+00:00",
+        "specimen": [
+          {
+            "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e1a2c957-a745-501b-880c-358c673f2013",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "e1a2c957-a745-501b-880c-358c673f2013",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/laboratory/StructureDefinition/ServiceRequest-eu-lab|2.0.0"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PLAC"
+                }
+              ]
+            },
+            "system": "http://B82033-pickeringmedicalpractice.com/labrequest",
+            "value": "REQ-20220307-000046-002",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "B82033"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "FILL"
+                }
+              ]
+            },
+            "system": "http://Y8J7D-pathlab001.com/report",
+            "value": "REP-20220308-008902",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1000971000000107",
+              "display": "Urea and electrolytes level"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "requester": {
+          "reference": "urn:uuid:84c94bb1-4336-5607-9124-6b82052db22a"
+        },
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "authoredOn": "2022-03-07T09:48:00+00:00",
+        "specimen": [
+          {
+            "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core|2.0.0"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "https://examplesihe.org.uk/Id/mrn/RCB",
+            "value": "RCB4719263",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "RCB"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PI"
+                }
+              ]
+            },
+            "system": "https://examplesihe.org.uk/Id/patient-internal/Y8J7D",
+            "value": "Y8J7D0381527",
+            "assigner": {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y8J7D"
+              }
+            }
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "NH"
+                }
+              ]
+            },
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        ],
+        "name": [
+          {
+            "family": "EDITESTPATIENT",
+            "given": [
+              "ONE",
+              "John"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1925-01-27",
+        "address": [
+          {
+            "postalCode": "B6 5RQ"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "44b4c2c2-e882-59cb-bcab-4db2c6ed512b",
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "Y8J7D"
+          }
+        ],
+        "name": "TD008362 PATH LAB 001",
+        "address": [
+          {
+            "line": [
+              "PATHOLOGY LAB",
+              "7-8 WELLINGTON PLACE"
+            ],
+            "city": "LEEDS",
+            "district": "WEST YORKSHIRE",
+            "postalCode": "LS1 4AP"
+          }
+        ],
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Organization|2.5.0"
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b",
+      "resource": {
+        "resourceType": "Specimen",
+        "id": "e1fae66a-128e-57f2-a3c0-41647ca6076b",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/laboratory/StructureDefinition/Specimen-eu-lab|2.0.0"
+          ]
+        },
+        "status": "available",
+        "type": {
+          "text": "Venous blood specimen"
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "request": [
+          {
+            "reference": "urn:uuid:5034f823-2354-50e0-8023-1b3cf29cd7dc"
+          }
+        ],
+        "collection": {
+          "collectedDateTime": "2022-03-07T10:02:00+00:00"
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "PLAC"
+                }
+              ]
+            },
+            "system": "http://B82033-pickeringmedicalpractice.com/specimen",
+            "value": "SPC-REQ-20220307-000014"
+          }
+        ],
+        "accessionIdentifier": {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "ACSN"
+              }
+            ]
+          },
+          "system": "http://Y8J7D-pathlab001.com/specimen",
+          "value": "SPC-Lab-20220307-007856",
+          "assigner": {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            }
+          }
+        },
+        "receivedTime": "2022-03-07T14:54:00+00:00"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:32f8a5ae-c597-54ac-b65c-2d1edfc352f2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "32f8a5ae-c597-54ac-b65c-2d1edfc352f2",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:5034f823-2354-50e0-8023-1b3cf29cd7dc"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1031081000000108",
+              "display": "Liver function tests"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "hasMember": [
+          {
+            "reference": "urn:uuid:a710f661-d19a-57c2-a0c2-41242f538809"
+          },
+          {
+            "reference": "urn:uuid:2fd38bf8-4ca6-5014-bce1-bbdc3d02b455"
+          },
+          {
+            "reference": "urn:uuid:b2b377cb-8999-5ad4-a3a7-0ebf744f6385"
+          },
+          {
+            "reference": "urn:uuid:67f8aca5-cf0d-5db2-9338-98f605fc85bc"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/6.0/StructureDefinition/extension-Observation.organizer",
+            "valueBoolean": true
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:91b76c07-cbc7-5a01-9b90-e6b4eea3fd80",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "91b76c07-cbc7-5a01-9b90-e6b4eea3fd80",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:e1a2c957-a745-501b-880c-358c673f2013"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1000971000000107",
+              "display": "Urea and electrolytes level"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "hasMember": [
+          {
+            "reference": "urn:uuid:9667895d-62e6-54ac-9ae0-5a614c3aa4d4"
+          },
+          {
+            "reference": "urn:uuid:b454e50d-add5-5d43-bf30-3e74d00b748b"
+          },
+          {
+            "reference": "urn:uuid:75268412-928e-5545-95f0-50dae673af89"
+          },
+          {
+            "reference": "urn:uuid:f6f51c99-e09c-5d75-b6ba-c11787b54760"
+          },
+          {
+            "reference": "urn:uuid:b2e68e13-b395-5f61-b2c4-4aa8e4062edc"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/6.0/StructureDefinition/extension-Observation.organizer",
+            "valueBoolean": true
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:84c94bb1-4336-5607-9124-6b82052db22a",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "84c94bb1-4336-5607-9124-6b82052db22a",
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-PractitionerRole|2.4.0"
+          ]
+        },
+        "practitioner": {
+          "type": "Practitioner",
+          "identifier": {
+            "system": "https://fhir.hl7.org.uk/Id/gmc-number",
+            "value": "C1008215"
+          },
+          "display": "Dr Gale GASKELL",
+          "reference": "urn:uuid:73062312-924a-5a6d-972b-1a454bb5a8c6"
+        },
+        "organization": {
+          "type": "Organization",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "B82033"
+          },
+          "display": "PICKERING MEDICAL PRACTICE",
+          "reference": "urn:uuid:7f2280d3-a318-510e-98c8-389ad7c30671"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a710f661-d19a-57c2-a0c2-41242f538809",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "a710f661-d19a-57c2-a0c2-41242f538809",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:5034f823-2354-50e0-8023-1b3cf29cd7dc"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "997591000000109",
+              "display": "Serum total bilirubin level"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1107221000000109",
+              "display": "Total bilirubin substance concentration in serum"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 6,
+          "unit": "umol/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "umol/L"
+        },
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 21,
+              "unit": "umol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "umol/L"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2fd38bf8-4ca6-5014-bce1-bbdc3d02b455",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "2fd38bf8-4ca6-5014-bce1-bbdc3d02b455",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:5034f823-2354-50e0-8023-1b3cf29cd7dc"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1000821000000103",
+              "display": "Serum albumin level"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1105861000000106",
+              "display": "Albumin mass concentration in serum"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 47,
+          "unit": "g/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/L"
+        },
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 35,
+              "unit": "g/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/L"
+            },
+            "high": {
+              "value": 50,
+              "unit": "g/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "g/L"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b2b377cb-8999-5ad4-a3a7-0ebf744f6385",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b2b377cb-8999-5ad4-a3a7-0ebf744f6385",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:5034f823-2354-50e0-8023-1b3cf29cd7dc"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1000621000000104",
+              "display": "Serum alkaline phosphatase level"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1106051000000106",
+              "display": "Alkaline phosphatase enzyme activity in serum"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 96,
+          "unit": "iu/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "[iU]/L"
+        },
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 30,
+              "unit": "iu/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "[iU]/L"
+            },
+            "high": {
+              "value": 130,
+              "unit": "iu/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "[iU]/L"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:67f8aca5-cf0d-5db2-9338-98f605fc85bc",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "67f8aca5-cf0d-5db2-9338-98f605fc85bc",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:5034f823-2354-50e0-8023-1b3cf29cd7dc"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1018251000000107",
+              "display": "Serum alanine aminotransferase level"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1106081000000100",
+              "display": "Alanine aminotransferase enzyme activity in serum"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 15,
+          "unit": "iu/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "[iU]/L"
+        },
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "referenceRange": [
+          {
+            "high": {
+              "value": 40,
+              "unit": "iu/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "[iU]/L"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9667895d-62e6-54ac-9ae0-5a614c3aa4d4",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "9667895d-62e6-54ac-9ae0-5a614c3aa4d4",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:e1a2c957-a745-501b-880c-358c673f2013"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1000951000000103",
+              "display": "Serum urea level"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1110281000000107",
+              "display": "Urea substance concentration in serum"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 3.7,
+          "unit": "mmol/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "mmol/L"
+        },
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 2.5,
+              "unit": "mmol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "mmol/L"
+            },
+            "high": {
+              "value": 7.8,
+              "unit": "mmol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "mmol/L"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b454e50d-add5-5d43-bf30-3e74d00b748b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b454e50d-add5-5d43-bf30-3e74d00b748b",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:e1a2c957-a745-501b-880c-358c673f2013"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1000661000000107",
+              "display": "Serum sodium level"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1107871000000107",
+              "display": "Sodium substance concentration in serum"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 139,
+          "unit": "mmol/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "mmol/L"
+        },
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 133,
+              "unit": "mmol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "mmol/L"
+            },
+            "high": {
+              "value": 146,
+              "unit": "mmol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "mmol/L"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:75268412-928e-5545-95f0-50dae673af89",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "75268412-928e-5545-95f0-50dae673af89",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:e1a2c957-a745-501b-880c-358c673f2013"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1000651000000109",
+              "display": "Serum potassium level"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1107761000000109",
+              "display": "Potassium substance concentration in serum"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 4.7,
+          "unit": "mmol/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "mmol/L"
+        },
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 3.5,
+              "unit": "mmol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "mmol/L"
+            },
+            "high": {
+              "value": 5.3,
+              "unit": "mmol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "mmol/L"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f6f51c99-e09c-5d75-b6ba-c11787b54760",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "f6f51c99-e09c-5d75-b6ba-c11787b54760",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:e1a2c957-a745-501b-880c-358c673f2013"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1000731000000107",
+              "display": "Serum creatinine level"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1107001000000108",
+              "display": "Creatinine substance concentration in serum"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 73,
+          "unit": "umol/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "umol/L"
+        },
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 59,
+              "unit": "umol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "umol/L"
+            },
+            "high": {
+              "value": 104,
+              "unit": "umol/L",
+              "system": "http://unitsofmeasure.org",
+              "code": "umol/L"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b2e68e13-b395-5f61-b2c4-4aa8e4062edc",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b2e68e13-b395-5f61-b2c4-4aa8e4062edc",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Observation-Lab-Pathology|0.2.1"
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:e1a2c957-a745-501b-880c-358c673f2013"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394915009",
+                "display": "General pathology (specialty)"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1011481000000105",
+              "display": "eGFR (estimated glomerular filtration rate) using creatinine Chronic Kidney Disease Epidemiology Collaboration equation per 1.73 square metres"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:bfe333d7-2a8c-5dae-a44a-5d3b120d2ef5",
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9999999468"
+          }
+        },
+        "effectiveDateTime": "2022-03-07T10:02:00+00:00",
+        "issued": "2022-03-08T14:23:00+00:00",
+        "performer": [
+          {
+            "type": "Organization",
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y8J7D"
+            },
+            "display": "TD008362 PATH LAB 001",
+            "reference": "urn:uuid:44b4c2c2-e882-59cb-bcab-4db2c6ed512b"
+          }
+        ],
+        "valueQuantity": {
+          "value": 100,
+          "unit": "mL/min/1.73m2",
+          "system": "http://unitsofmeasure.org",
+          "code": "mL/min/((173/100).m2)"
+        },
+        "note": [
+          {
+            "text": "Calculated eGFR is not valid in children or pregnancy.\nLess accurate with acute change in creatinine (AKI).\nCaution with high or low muscle mass or amputation.\nAvoid blood sampling within 12 hours of eating meat.\nEthnicity factor comment removed Dec21 NG203.\n"
+          }
+        ],
+        "specimen": {
+          "reference": "urn:uuid:e1fae66a-128e-57f2-a3c0-41647ca6076b"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:73062312-924a-5a6d-972b-1a454bb5a8c6",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "73062312-924a-5a6d-972b-1a454bb5a8c6",
+        "identifier": [
+          {
+            "system": "https://fhir.hl7.org.uk/Id/gmc-number",
+            "value": "C1008215"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "GASKELL",
+            "given": [
+              "Gale"
+            ],
+            "prefix": [
+              "Dr"
+            ]
+          }
+        ],
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Practitioner|2.4.0"
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7f2280d3-a318-510e-98c8-389ad7c30671",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "7f2280d3-a318-510e-98c8-389ad7c30671",
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "B82033"
+          }
+        ],
+        "name": "PICKERING MEDICAL PRACTICE",
+        "address": [
+          {
+            "line": [
+              "SOUTHGATE"
+            ],
+            "city": "PICKERING",
+            "district": "NORTH YORKSHIRE",
+            "postalCode": "YO18 8BL"
+          }
+        ],
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Organization|2.5.0"
+          ]
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:25caa3c2-2abe-5027-95a5-902232469a2f",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "25caa3c2-2abe-5027-95a5-902232469a2f",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/England/StructureDefinition/England-Provenance-Lab-Pathology|0.1.0"
+          ]
+        },
+        "target": [
+          {
+            "reference": "urn:uuid:c678e649-7cf0-585a-a74d-726ef113d86e"
+          }
+        ],
+        "recorded": "2022-03-08T12:09:00+00:00",
+        "activity": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/iso-21089-lifecycle",
+              "code": "transform"
+            }
+          ]
+        },
+        "agent": [
+          {
+            "who": {
+              "identifier": {
+                "system": "https://api.service.nhs.uk/pathology-laboratory-reporting/test-reporting-system",
+                "value": "EXAMPLE-PRODUCT:Y8J7D"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

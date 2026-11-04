@@ -43,3 +43,23 @@
 - PID-32 NHS Number verification status - FHIR extension is UK Core; not profiled.
 - Reference range comparators (`<48`) - EU Lab low/highComparator extensions.
 - UKAS requirement for showing the subcontracting laboratory - clause to confirm.
+- NHS England package `fhir.r4.nhsengland.pathology` latest published is 0.3.0 (examples
+  index on Simplifier is IG version 0.5.1). England-Observation-Lab-Pathology is 0.2.1 in the
+  package, 0.3.0 in the API OAS.
+- NHS England examples have no Patient resource (NHS Number on subject.identifier only);
+  the ORU_R01 versions use placeholder PID-5/7/8.
+- Report model aligned to NHS England (2026-11-04): DiagnosticReport per report, generic
+  code 721981007; OBR = organizer Observation (R6 Observation.organizer extension, defined
+  in the NHS England package) - this guide's LaboratoryResult does not define the extension;
+  notebook 02 adds it for NHS England documents only.
+- NPEx (National Pathology Exchange): X-Lab Ltd with The Health Informatics Service, national
+  NHS service since 2010, now marketed as Labgnostic. Message formats used by NPEx - to confirm.
+- YHCR: Interweave IG https://fhir.interweavedigital.com/index.html (STU3, R4 profiles incl.
+  Interweave-DiagnosticReport).
+- England-Bundle-Lab-Pathology 0.1.0 (package 0.3.0) defect: slice provenanceTestReportingSystem
+  typed Resource -> every entry "matches more than one slice", plus "required slice not found".
+  NHS England's own examples declare Bundle-eu-lab|2.0.0 and validate cleanly. Report to NHS England.
+- Notebook validation was run with VALIDATOR_TX=n/a (tx.fhir.org timed out repeatedly); codes were
+  checked separately with CodeSystem/$lookup.
+- MRNs RCB4719263 / RCB6052841 and lab PIs Y8J7D0381527 / Y8J7D0592374 added to
+  ../Testing/MRN-Mapping.md (not committed there).
