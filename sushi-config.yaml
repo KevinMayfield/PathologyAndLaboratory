@@ -1,0 +1,114 @@
+# sushi-config.yaml is documented https://fshschool.org/docs/sushi/configuration/
+id: fhir.nwgenomics.nhs.uk.palm
+canonical: https://fhir.nwgenomics.nhs.uk/PaLM
+version: 0.1.0
+name: EnglandPaLM
+title: England Pathology and Laboratory Medicine (PaLM) Technical Framework
+description: DRAFT - not an authoritative source. England localisation of the IHE Pathology and Laboratory Medicine (PaLM) Technical Framework, covering HL7 v2.5.1 and HL7 FHIR R4 and how to map between them. Aligned with the NHS England Pathology and Laboratory Medicine Reporting FHIR API (DAPB4101), HL7 Europe Laboratory Report and the NW GMSA FHIR IG.
+releaseLabel: ci-build
+status: draft
+experimental: true
+publisher:
+  - name: NHS North West Genomics
+  - url: https://www.nwgenomics.nhs.uk/contact-us
+license: CC-BY-4.0
+fhirVersion: 4.0.1
+jurisdiction: urn:iso:std:iso:3166#GB "United Kingdom of Great Britain and Northern Ireland"
+copyrightYear: 2026+
+
+dependencies:
+  hl7.fhir.eu.base: 2.0.1
+  hl7.fhir.eu.laboratory: 2.1.0
+  hl7.fhir.eu.extensions.r4: 1.3.1
+  # R5 cross-version extensions used by HL7 Europe; required by SUSHI 3.21+
+  hl7.fhir.uv.xver-r5.r4: 0.1.0
+
+FSHOnly: false
+parameters:
+  shownav: true
+  apply-contact: 'true'
+  apply-jurisdiction: 'true'
+  apply-publisher: 'true'
+  apply-version: 'true'
+  # SNOMED CT UK Edition for expansions/validation (same as the NW GMSA IG)
+  path-expansion-params: '../resources/Parameters-exp-params.json'
+
+instanceOptions:
+  setMetaProfile: standalone-only
+
+pages:
+  index.md:
+    title: Home
+    generation: markdown
+  PaLM.md:
+    title: IHE PaLM Technical Framework in England
+    generation: markdown
+  actors.md:
+    title: Actors and Systems
+    generation: markdown
+  LTW.md:
+    title: Laboratory Testing Workflow (LTW)
+    generation: markdown
+  ILW.md:
+    title: Inter-Laboratory Workflow (ILW)
+    generation: markdown
+  ResultsDistribution.md:
+    title: Results Distribution in England
+    generation: markdown
+  LAB-1.md:
+    title: Placer Order Management [LAB-1]
+    generation: markdown
+  LAB-2.md:
+    title: Filler Order Management [LAB-2]
+    generation: markdown
+  LAB-3.md:
+    title: Order Results Management [LAB-3]
+    generation: markdown
+  LAB-35.md:
+    title: Sub-order Management [LAB-35]
+    generation: markdown
+  LAB-36.md:
+    title: Sub-order Results Delivery [LAB-36]
+    generation: markdown
+  PathologyReportingAPI.md:
+    title: NHS England Pathology Laboratory Reporting API
+    generation: markdown
+  hl7v2.md:
+    title: HL7 v2.5.1 Segments and Data Types
+    generation: markdown
+  mapping.md:
+    title: Mapping HL7 v2 and FHIR
+    generation: markdown
+  DataModel.md:
+    title: FHIR Resources
+    generation: markdown
+  terminology.md:
+    title: Terminology
+    generation: markdown
+
+menu:
+  Home: index.html
+  Analysis and Design (Volume 1):
+    IHE PaLM in England: PaLM.html
+    Actors and Systems: actors.html
+    Laboratory Testing Workflow (LTW): LTW.html
+    Inter-Laboratory Workflow (ILW): ILW.html
+    Results Distribution in England: ResultsDistribution.html
+  Interactions (Volume 2):
+    Placer Order Management [LAB-1]: LAB-1.html
+    Filler Order Management [LAB-2]: LAB-2.html
+    Order Results Management [LAB-3]: LAB-3.html
+    Sub-order Management [LAB-35]: LAB-35.html
+    Sub-order Results Delivery [LAB-36]: LAB-36.html
+    NHS England Pathology Laboratory Reporting API: PathologyReportingAPI.html
+  Data Models (Volume 3):
+    FHIR Resources: DataModel.html
+    Laboratory Order: StructureDefinition-LaboratoryOrder.html
+    Laboratory Report: StructureDefinition-LaboratoryReport.html
+    Laboratory Result: StructureDefinition-LaboratoryResult.html
+    Specimen: StructureDefinition-Specimen.html
+    Terminology: terminology.html
+  HL7 v2 and Mapping (Volume 4):
+    HL7 v2.5.1 Segments and Data Types: hl7v2.html
+    Mapping HL7 v2 and FHIR: mapping.html
+  Artifacts: artifacts.html
