@@ -55,6 +55,9 @@ pages:
   ResultsDistribution.md:
     title: Results Distribution in England
     generation: markdown
+  ReportTypes.md:
+    title: Narrative Reports and Discrete Results
+    generation: markdown
   LAB-1.md:
     title: Placer Order Management [LAB-1]
     generation: markdown
@@ -97,6 +100,7 @@ menu:
     Laboratory Testing Workflow (LTW): LTW.html
     Inter-Laboratory Workflow (ILW): ILW.html
     Results Distribution in England: ResultsDistribution.html
+    Narrative Reports and Discrete Results: ReportTypes.html
   Interactions (Volume 2):
     Placer Order Management [LAB-1]: LAB-1.html
     Filler Order Management [LAB-2]: LAB-2.html

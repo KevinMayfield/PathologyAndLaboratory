@@ -204,6 +204,10 @@ A FHIR Document carries the report twice, in two forms that **SHALL** agree:
 The NHS England examples leave the section narrative `empty`. A system creating the document
 from an `ORU^R01` has everything it needs to generate it, and **SHOULD** do so.
 
+Most results sent through the API are *discrete* (FBC, U&E, HbA1c) and have no narrative of
+their own, so the narrative has to be generated - see
+[Narrative Reports and Discrete Results](ReportTypes.html#why-discrete-results-are-harder-to-send-as-a-fhir-document).
+
 #### What it means when transforming ORU^R01
 
 - **Build the resources first, then generate the narrative from them** - not from the HL7 v2
