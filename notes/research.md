@@ -68,3 +68,15 @@
   copied unchanged from fhir.r4.nhsengland.pathology 0.3.0 except for an added structuredefinition-wg = oo
   extension (the IG Publisher requires a work group for hl7.org URLs); allowed by the special-url parameter.
   Imported because the FHIR Document examples use it - the NHS England package is NOT a dependency.
+- PaLM requestables: SNOMED CT UK refset 1853561000000109 (Pathology and laboratory medicine
+  procedure simple reference set); UK Core STU2 2.0.2 ValueSet UKCore-PathologyAndLaboratoryMedicineProcedures
+  (memberOf 1853561000000109), preferred on UKCore-ServiceRequest-Lab.code and
+  UKCore-Observation-Group-Lab.code. Results: 1853551000000106 (PaLM observables), 999002881000000100 (PBCL).
+  tx.fhir.org UK Edition is 20230412 - no PaLM refsets. To confirm: whether example codes
+  (1022441000000101 FBC etc., from NHS England examples) are procedures or observables.
+- Answered (2026-11-04, CSIRO Ontoserver, UK Edition 20250702): refset 1853561000000109 has 358 members,
+  1853551000000106 4019, PBCL 999002881000000100 3741. The NHS England examples' test group codes
+  (1022441000000101 FBC, LFT, U&E, lipids, GTT, CRP, HBsAg, urine MCS) are PBCL; HbA1c/HPV are PaLM
+  observables - none are PaLM procedures. PaLM procedures: 26604007 FBC, 252167001 U&E, 271244005 lipids,
+  135842001 CRP, 371981000000106 HbA1c IFCC, 47758006 HBsAg, 700152009 HPV, 113076002 GTT, 401324008 urine MCS.
+  LFT: 26958001 Hepatic function panel.

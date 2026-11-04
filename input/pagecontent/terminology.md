@@ -10,7 +10,7 @@ sources before using it for implementation.
 |---|---|---|---|---|
 | Result (what was measured) | OBX-3 | `Observation.code` | SNOMED CT UK Edition - PaLM observable entities | The DAPB4101 / NHS England PaLM codes. Example: `1022431000000105` Haemoglobin estimation |
 | | | | LOINC (second coding) | Optional, where known. Example: `718-7` |
-| Test group / test ordered or reported | OBR-4 | `ServiceRequest.code`, test group `Observation.code` | SNOMED CT UK (PaLM) | Example: `1022441000000101` FBC - full blood count (as the NHS England examples). **To confirm** - the PaLM code set for requestable tests |
+| Test group / test ordered or reported | OBR-4 | `ServiceRequest.code`, test group `Observation.code`, `DiagnosticReport.code` (one test) | SNOMED CT UK - [PaLM Requestable Tests](ValueSet-palm-procedure.html) (refset `1853561000000109`) | The England equivalent of the National Genomic Test Directory and NICIP - see below |
 | Report type | - | `DiagnosticReport.code`, `Composition.type` | SNOMED CT, LOINC | `721981007` Diagnostic studies report (NHS England), LOINC `11502-2` Laboratory report |
 | Units | OBX-6 | `valueQuantity.code` | UCUM | Example: `10*9/L`, `g/L`, `mmol/mol` |
 | Coded result | OBX-5 (`CWE`) | `valueCodeableConcept` | SNOMED CT | Organisms, qualifiers (`Positive`, `Not detected`) |
@@ -30,6 +30,49 @@ The NHS England <a href="https://digital.nhs.uk/data-and-information/information
 standard defines the PaLM SNOMED CT codes and their use. Laboratories map their local test
 codes to them (the PaLM mapping project). Where a local code has no PaLM code yet, send the
 local code with coding system <code>L</code> and flag the gap.
+</div>
+
+### Requestable Tests (PaLM Procedures)
+
+Genomics has the [National Genomic Test Directory](https://www.england.nhs.uk/publication/national-genomic-test-directories/)
+and imaging has NICIP. For laboratory medicine the national list of tests that can be requested
+is the SNOMED CT UK Edition **Pathology and laboratory medicine procedure simple reference set**
+(`1853561000000109`) - the PaLM *requestables*, modelled as SNOMED CT procedures. Results are the
+PaLM *reportables*, the observables refset `1853551000000106` (and the older Pathology Bounded Code
+List `999002881000000100`).
+
+| | Genomics | Imaging | Laboratory medicine |
+|---|---|---|---|
+| National list of requestable tests | National Genomic Test Directory (code system, with eligibility criteria) | NICIP (code system, mapped to SNOMED CT and OPCS) | PaLM procedure refset `1853561000000109` (SNOMED CT subset - no national directory of who offers what, or eligibility) |
+| In this guide | - | - | [PaLM Requestable Tests](ValueSet-palm-procedure.html), preferred for the `palmProcedure` slice of [Laboratory Order](StructureDefinition-LaboratoryOrder.html) `code` and the `snomedCT` slice of [Laboratory Report](StructureDefinition-LaboratoryReport.html) `code` ([Laboratory Report Codes](ValueSet-laboratory-report-snomedct.html)) |
+| UK Core | - | - | `UKCore-PathologyAndLaboratoryMedicineProcedures` (same refset), preferred for `UKCore-ServiceRequest-Lab.code` and `UKCore-Observation-Group-Lab.code` |
+{:.grid}
+
+Each laboratory keeps its own test catalogue (local codes, profiles, eligibility) and maps it to
+PaLM. In HL7 v2 send the PaLM code in OBR-4 CWE-1 to CWE-3 and the laboratory's code as the
+alternate (CWE-4 to CWE-6).
+
+Earlier national catalogues - the National Laboratory Medicine Catalogue (NLMC, Royal College of
+Pathologists) and the UK Unified Test List (`44991000237108`, retired in UK Core) - are replaced by
+PaLM.
+
+The [PaLM Requestable Tests](ValueSet-palm-procedure.html) value set lists the 358 members of the
+refset in the UK Edition of 2 July 2025. They are listed, rather than given as a refset rule, because
+the UK Edition on tx.fhir.org (April 2023) does not yet contain the refset. They were expanded on
+CSIRO's public Ontoserver by `scripts/palm_valueset.py`, which can be re-run for a new release.
+
+<div class="alert alert-warning" role="alert">
+<b>Open - example order codes.</b> The test group codes in the NHS England examples, which this guide's
+examples and the <code>ORU^R01</code> versions use for OBR-4 and <code>ServiceRequest.code</code>, are
+<b>results</b> codes, not PaLM requestables. For example <code>1022441000000101</code> FBC - full blood
+count, Liver function tests, Urea and electrolytes level and Serum lipids level are in the Pathology
+Bounded Code List; HbA1c and HPV are PaLM observables. The PaLM requestables for the same tests are,
+for example, <code>26604007</code> Full blood count, <code>26958001</code> Hepatic function panel (LFT), <code>252167001</code> Urea and electrolytes,
+<code>271244005</code> Measurement of serum lipid level, <code>135842001</code> Serum C reactive protein
+level, <code>371981000000106</code> Hb A1c measurement - IFCC standardised, <code>47758006</code> Hepatitis
+B surface antigen measurement, <code>700152009</code> Human papilloma virus screening,
+<code>113076002</code> Glucose tolerance test and <code>401324008</code> Urinary microscopy, culture and
+sensitivities.
 </div>
 
 ### Coding Systems in HL7 v2

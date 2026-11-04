@@ -35,6 +35,16 @@ Description:    """
 
 * code 1..1 MS
 * code ^short = "Test or panel requested (HL7 v2 OBR-4 Universal Service Identifier)"
+* code.coding ^slicing.discriminator.type = #value
+* code.coding ^slicing.discriminator.path = "system"
+* code.coding ^slicing.rules = #open
+* code.coding ^slicing.description = "Slice based on the system"
+* code.coding ^slicing.ordered = false
+* code.coding contains palmProcedure 0..* MS
+* code.coding[palmProcedure].system = "http://snomed.info/sct"
+* code.coding[palmProcedure].code 1..1
+* code.coding[palmProcedure] from PaLMProcedure (preferred)
+* code.coding[palmProcedure] ^short = "PaLM requestable test (SNOMED CT UK, Pathology and laboratory medicine procedure refset) - the England equivalent of the National Genomic Test Directory and NICIP. The laboratory's own test code can be sent as another coding"
 
 * subject 1..1 MS
 * subject only Reference(Patient)

@@ -39,7 +39,22 @@ Description:    """
 * category ^short = "Laboratory discipline (HL7 v2 OBR-24 Diagnostic Serv Sect ID)"
 
 * code MS
-* code ^short = "Report type: SNOMED CT 721981007 Diagnostic studies report (NHS England), LOINC 11502-2 Laboratory report. The tests reported (HL7 v2 OBR-4) are ServiceRequest.code and the result Observation.code"
+* code ^short = "Report type: SNOMED CT 721981007 Diagnostic studies report (NHS England), LOINC 11502-2 Laboratory report; or, for a report of one test, the PaLM requestable (OBR-4). The tests reported are also ServiceRequest.code and the result Observation.code"
+* code.coding ^slicing.discriminator.type = #value
+* code.coding ^slicing.discriminator.path = "system"
+* code.coding ^slicing.rules = #open
+* code.coding ^slicing.description = "Slice based on the system"
+* code.coding ^slicing.ordered = false
+* code.coding contains
+    snomedCT 0..* MS and
+    loinc 0..1 MS
+* code.coding[snomedCT].system = "http://snomed.info/sct"
+* code.coding[snomedCT].code 1..1
+* code.coding[snomedCT] from LaboratoryReportSNOMEDCT (preferred)
+* code.coding[snomedCT] ^short = "SNOMED CT: the PaLM requestable test reported (OBR-4) - as the Genomic Test Directory code in genomics and NICIP in imaging - and/or the report type 721981007 Diagnostic studies report (NHS England)"
+* code.coding[loinc].system = "http://loinc.org"
+* code.coding[loinc].code 1..1
+* code.coding[loinc] ^short = "LOINC report type, 11502-2 Laboratory report (HL7 Europe Laboratory preferred binding)"
 
 * subject 1..1 MS
 * subject only Reference(Patient)

@@ -119,7 +119,7 @@ header, populated by the Order Filler.
 | OBR-1 | Set ID | SI | R | `1` | | - |
 | OBR-2 | Placer Order Number | [EI](#ei) | C | `GP-ORD-000123^GPSYSTEM` | Same as ORC-2. Required if the order was electronic | `ServiceRequest.identifier` (`PLAC`); `DiagnosticReport.basedOn` |
 | OBR-3 | Filler Order Number | [EI](#ei) | C | `26H012345^LIMS` | Required in ORU_R01. The laboratory (report) number users quote - the same on every OBR of one report | `DiagnosticReport.identifier` |
-| OBR-4 | Universal Service Identifier | CWE | R | `1022441000000101^FBC - full blood count^SCT` | The test group or test: SNOMED CT UK (PaLM) code, or the laboratory's code with the national code as the alternate | `ServiceRequest.code`; the test group `Observation.code` |
+| OBR-4 | Universal Service Identifier | CWE | R | `1022441000000101^FBC - full blood count^SCT` | The test group or test: the [PaLM requestable](ValueSet-palm-procedure.html) (SNOMED CT UK, refset `1853561000000109`) in CWE-1 to CWE-3, the laboratory's own code as the alternate (CWE-4 to CWE-6) | `ServiceRequest.code`; the test group `Observation.code` |
 | OBR-7 | Observation Date/Time | TS | C | `20261103091500` | Required in ORU_R01 - the specimen collection time | `DiagnosticReport.effectiveDateTime` |
 | OBR-13 | Relevant Clinical Information | ST | O | | Prefer NTE | `ServiceRequest.note` |
 | OBR-16 | Ordering Provider | [XCN](#xcn) | R | `G1234567^GREEN^Alex^^^Dr^^^GMP^^^^DN` | Same as ORC-12 | `ServiceRequest.requester` |
