@@ -80,3 +80,13 @@
   observables - none are PaLM procedures. PaLM procedures: 26604007 FBC, 252167001 U&E, 271244005 lipids,
   135842001 CRP, 371981000000106 HbA1c IFCC, 47758006 HBsAg, 700152009 HPV, 113076002 GTT, 401324008 urine MCS.
   LFT: 26958001 Hepatic function panel.
+- Checked (2026-11-04): no published list of PaLM requestable (panel) -> member observables or units.
+  SNOMED CT UK Edition 20250702 (CSIRO Ontoserver): procedures are defined only by Method/Component
+  (26604007 FBC = Measurement of Blood cell); observables (e.g. 1108071000000101 neutrophil count) carry
+  Component/Property/Inheres in/Direct site but no Units attribute. TRUD Pathology category: NHS National
+  Laboratory Medicine Catalogue (item 77, technology preview, last release 5.1.0 Nov 2015), PBCL (item 23),
+  PBCL Read->SNOMED map (item 270); guest pages don't say whether NLMC/PBCL contain groupings or units
+  (download needs a TRUD login). DAPB4017 (retired 1 Nov 2023) planned a UK Pathology Units List (UCUM)
+  and said single-unit results would carry the unit in the UTL/SNOMED model - not seen in the UK Edition.
+  NHS England PaLM mapping guidance: reportables are single items, not panels. Open: NLMC/PBCL file
+  contents; whether UKPUL is still published.
