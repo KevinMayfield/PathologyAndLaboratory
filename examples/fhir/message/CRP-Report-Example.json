@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "ee9ffc7d-2d03-5796-8306-b745119c62ec",
+  "id": "Message-CRP-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

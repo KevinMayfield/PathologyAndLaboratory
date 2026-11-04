@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "9c4433a8-4b80-5926-9e69-1f7333cfdd5f",
+  "id": "Document-Lipids-HbA1c-Report-Example",
   "meta": {
     "profile": [
       "https://fhir.nhs.uk/England/StructureDefinition/England-Bundle-Lab-Pathology|0.1.0"
@@ -1210,6 +1210,10 @@
           "profile": [
             "https://fhir.nhs.uk/England/StructureDefinition/England-Provenance-Lab-Pathology|0.1.0"
           ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Laboratory report REP-20220706-002378 sent by product EXAMPLE-PRODUCT:Y8J7D.</p></div>"
         },
         "target": [
           {

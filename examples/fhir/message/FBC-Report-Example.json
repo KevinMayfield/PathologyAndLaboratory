@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "c377b8a8-0ee8-5440-9416-9a45b6066018",
+  "id": "Message-FBC-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

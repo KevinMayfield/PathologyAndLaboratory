@@ -234,6 +234,8 @@ Instance: ProvenanceFBC
 InstanceOf: LaboratoryReportProvenance
 Usage: #inline
 * id = "ProvenanceFBC"
+* text.status = #additional
+* text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Laboratory report 26H012345 sent by product P.GH7-4TY.</p></div>"
 * target = Reference(Composition/CompositionFBC)
 * recorded = "2026-11-03T16:05:30Z"
 * activity = http://terminology.hl7.org/CodeSystem/iso-21089-lifecycle#transform "Transform/Translate Record Lifecycle Event"

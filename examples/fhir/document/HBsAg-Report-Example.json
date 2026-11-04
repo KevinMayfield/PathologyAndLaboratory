@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "8d502224-d963-5b20-98ac-a0b35978bbc6",
+  "id": "Document-HBsAg-Report-Example",
   "meta": {
     "profile": [
       "https://fhir.nhs.uk/England/StructureDefinition/England-Bundle-Lab-Pathology|0.1.0"
@@ -692,6 +692,10 @@
           "profile": [
             "https://fhir.nhs.uk/England/StructureDefinition/England-Provenance-Lab-Pathology|0.1.0"
           ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Laboratory report REP-20220311-003927 sent by product EXAMPLE-PRODUCT:Y8J7D.</p></div>"
         },
         "target": [
           {

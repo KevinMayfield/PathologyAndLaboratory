@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "e8b4a90a-1ea3-5ef4-af3c-81e679fc6a81",
+  "id": "Message-Lipids-HbA1c-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

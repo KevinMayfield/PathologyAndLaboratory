@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "ef429e96-c8f9-5116-9904-df27e8c620ab",
+  "id": "Message-LFT-UandE-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

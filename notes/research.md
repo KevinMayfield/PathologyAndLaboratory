@@ -63,3 +63,8 @@
   checked separately with CodeSystem/$lookup.
 - MRNs RCB4719263 / RCB6052841 and lab PIs Y8J7D0381527 / Y8J7D0592374 added to
   ../Testing/MRN-Mapping.md (not committed there).
+- Observation.organizer: input/resources/StructureDefinition-Extension-UKCore-ObservationOrganizer.json is
+  HL7 UK's Extension-UKCore-ObservationOrganizer (R4 backport of R6 Observation.organizer, Apache 2.0),
+  copied unchanged from fhir.r4.nhsengland.pathology 0.3.0 except for an added structuredefinition-wg = oo
+  extension (the IG Publisher requires a work group for hl7.org URLs); allowed by the special-url parameter.
+  Imported because the FHIR Document examples use it - the NHS England package is NOT a dependency.

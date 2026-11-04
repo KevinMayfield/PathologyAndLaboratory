@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "9f78bae1-f0dc-5e71-a11a-5bcfc4147536",
+  "id": "Message-HbA1c-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

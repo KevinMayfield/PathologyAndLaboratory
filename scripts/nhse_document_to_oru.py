@@ -329,12 +329,18 @@ def main():
         bundle = json.loads((examples_dir / file).read_text())
         message = convert(bundle, obr24, f"NHSE-EX-{n:04d}")
         (OUT / f"{name}.hl7").write_bytes(message.encode("utf-8"))
+        links = ""
+        for kind, label, notebook in [("message", "FHIR Message", "01-oru-r01-to-fhir-message"),
+                                      ("document", "FHIR Document for the NHS England API", "02-fhir-message-to-fhir-document")]:
+            if (ROOT / "examples" / "fhir" / kind / f"{name}.json").exists():
+                links += (f"- {label}: [Bundle-{kind.capitalize()}-{name}](Bundle-{kind.capitalize()}-{name}.html) "
+                          f"(notebook `{notebook}`, file `examples/fhir/{kind}/{name}.json`)\n")
         page.append(f"### {name}\n\n**{specialism}.** {summary}\n\n"
                     f"- NHS England FHIR Document: [Bundle-{name}]({SIMPLIFIER}/Bundle-{name}?version=0.5.1) "
                     f"(package `{PACKAGE}` {PACKAGE_VERSION}, `{file}`)\n"
                     f"- HL7 v2 file: [`examples/hl7v2/ORU_R01/{name}.hl7`]"
-                    f"(https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/{name}.hl7)\n\n"
-                    "```\n" + message.replace("\r", "\n") + "```\n")
+                    f"(https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/{name}.hl7)\n"
+                    + links + "\n```\n" + message.replace("\r", "\n") + "```\n")
         print("wrote", OUT / f"{name}.hl7")
     PAGE.write_text("\n".join(page))
     print("wrote", PAGE)
@@ -357,6 +363,81 @@ They were generated from the FHIR Documents in the `fhir.r4.nhsengland.pathology
 using the FHIR to HL7 v2 rules on [Mapping HL7 v2 and FHIR](mapping.html#fhir-to-hl7-v2). The
 [notebooks](https://github.com/KevinMayfield/PathologyAndLaboratory/tree/main/notebooks) convert them
 back: `ORU^R01` to a FHIR Message, then the FHIR Message to a FHIR Document for the NHS England API.
+
+### The Three Forms of Each Example
+
+Each example below is given three ways:
+
+1. the **HL7 v2.5.1 `ORU^R01`**, as a LIMS sends it ([LAB-3](LAB-3.html))
+2. the **FHIR Message** converted from it - the FHIR equivalent of the HL7 v2 message, as in
+   [Laboratory Result (R01)](MessageDefinition-laboratory-result.html). Like HL7 v2, it refers to
+   practitioners and organisations by their codes (identifier references), not as resources
+3. the **FHIR Document** built from the FHIR Message - what the order comms system sends to the
+   [NHS England Pathology Laboratory Reporting API](PathologyReportingAPI.html)
+
+All the FHIR examples are also listed under [Artifacts](artifacts.html) (groups *NHS England Examples - FHIR Messages* and *- FHIR Documents*).
+
+### Differences from the NHS England FHIR Documents
+
+The results are the same as NHS England's - every Observation code, value, unit, reference range
+and flag. The FHIR Documents here are **not** copies of NHS England's, though: they are what a
+system produces when it builds the document from an `ORU^R01` following this guide. The
+differences, and why:
+
+**Human readable narrative - the most important addition.** A FHIR Document is a record a person
+reads: one of the core principles of
+[FHIR Documents](https://hl7.org/fhir/R4/documents.html) is that the document's narrative (the
+Composition and section `text`) is the *attested* content, and that a document must be
+displayable to a person without the receiver understanding every coded element. NHS England's
+examples leave every section narrative `empty`, so a receiver has nothing human readable to show.
+The documents here generate it from the coded resources: a header in `Composition.text` (NHS
+Number, report number, status, requester, laboratory, specimen, issued time) and a results table
+for each test group, plus the report comments - see
+[Human Readable and Computer Processable](PathologyReportingAPI.html#human-readable-and-computer-processable).
+That makes the documents humanly readable, which they must be for a GP system to display, print
+or forward them safely.
+
+**Other additions** - they all come from content that is in the `ORU^R01`, so leaving them out
+would lose information:
+
+- a **Patient** resource with the NHS Number, hospital number (MRN) and laboratory patient number
+  (PID-3) and demographics (PID-5, PID-7, PID-8); NHS England's examples have only the NHS Number
+- **order details** on each ServiceRequest: the test requested (`code`, OBR-4), the Filler Order
+  Number (ORC-3), identifier types (`PLAC`, `FILL`, `ACSN`) and the ODS code of the assigning
+  organisation (`assigner`)
+- **`DiagnosticReport.effectiveDateTime`** - the specimen collection time (OBR-7)
+- a **second code** where the meaning is the same: LOINC `11502-2` Laboratory report alongside
+  SNOMED CT `721981007`, and the HL7 v2 table 0074 discipline (OBR-24) alongside the SNOMED CT
+  specialty
+- a **report comment section** when the report has a comment (NTE after the OBR: the GTT and urine
+  examples)
+- references that carry the **identifier and name** as well as the `reference`, so a receiver can
+  match the practitioner and organisation without resolving them
+
+**Consistency** - the conversion takes each value from one place in the `ORU^R01`, which makes
+some values consistent that are not in NHS England's examples (not intended as corrections, but
+worth knowing):
+
+- `Composition.date` is when the report was issued (OBR-22). NHS England uses the same date in all
+  nine examples, in one case before the report was issued
+- every result's `issued` is the report's (OBR-22); two NHS England examples carry dates from
+  other examples
+- `ServiceRequest.status` is `completed` for a final report (ORC-5 `CM`), not `active`
+- one section per test group: in the Lipids/HbA1c example NHS England has a single section and
+  the HbA1c result is in none
+
+**Not carried** through HL7 v2 (so not in these documents): the `valueset-reference` extensions on
+result codes (which NHS England list a code is from - they can be re-derived from the code),
+`ServiceRequest.category`, `PractitionerRole.code` and `specialty`, the FBC reason for request
+(could be sent in OBR-31), the GTT specimens' fasting status (no SPM field) and the Provenance
+agent type. The HbA1c interpretive reference range text becomes a result comment, because OBX-7
+cannot hold several lines.
+
+**Profile** - the documents declare `England-Bundle-Lab-Pathology|0.1.0`, as the API
+specification says (NHS England's examples declare `Bundle-eu-lab|2.0.0`). The published version
+of that profile has a slicing defect (see the
+[Pathology Laboratory Reporting API](PathologyReportingAPI.html#profiles) page), so the validator
+reports slicing errors for these examples that come from the profile, not from the documents.
 
 ### Notes
 

@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "4da2b47d-d3c4-534b-8d72-48a12e297097",
+  "id": "Message-Urine-MCS-Unstructured-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

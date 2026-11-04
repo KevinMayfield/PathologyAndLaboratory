@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "69a03271-c547-5bde-bb99-97c3bea0c028",
+  "id": "Message-HPV-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

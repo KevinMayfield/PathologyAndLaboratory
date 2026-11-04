@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "9a01032e-0a7a-5341-a061-4a5796012e07",
+  "id": "Message-HBsAg-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

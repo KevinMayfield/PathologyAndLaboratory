@@ -16,6 +16,81 @@ using the FHIR to HL7 v2 rules on [Mapping HL7 v2 and FHIR](mapping.html#fhir-to
 [notebooks](https://github.com/KevinMayfield/PathologyAndLaboratory/tree/main/notebooks) convert them
 back: `ORU^R01` to a FHIR Message, then the FHIR Message to a FHIR Document for the NHS England API.
 
+### The Three Forms of Each Example
+
+Each example below is given three ways:
+
+1. the **HL7 v2.5.1 `ORU^R01`**, as a LIMS sends it ([LAB-3](LAB-3.html))
+2. the **FHIR Message** converted from it - the FHIR equivalent of the HL7 v2 message, as in
+   [Laboratory Result (R01)](MessageDefinition-laboratory-result.html). Like HL7 v2, it refers to
+   practitioners and organisations by their codes (identifier references), not as resources
+3. the **FHIR Document** built from the FHIR Message - what the order comms system sends to the
+   [NHS England Pathology Laboratory Reporting API](PathologyReportingAPI.html)
+
+All the FHIR examples are also listed under [Artifacts](artifacts.html) (groups *NHS England Examples - FHIR Messages* and *- FHIR Documents*).
+
+### Differences from the NHS England FHIR Documents
+
+The results are the same as NHS England's - every Observation code, value, unit, reference range
+and flag. The FHIR Documents here are **not** copies of NHS England's, though: they are what a
+system produces when it builds the document from an `ORU^R01` following this guide. The
+differences, and why:
+
+**Human readable narrative - the most important addition.** A FHIR Document is a record a person
+reads: one of the core principles of
+[FHIR Documents](https://hl7.org/fhir/R4/documents.html) is that the document's narrative (the
+Composition and section `text`) is the *attested* content, and that a document must be
+displayable to a person without the receiver understanding every coded element. NHS England's
+examples leave every section narrative `empty`, so a receiver has nothing human readable to show.
+The documents here generate it from the coded resources: a header in `Composition.text` (NHS
+Number, report number, status, requester, laboratory, specimen, issued time) and a results table
+for each test group, plus the report comments - see
+[Human Readable and Computer Processable](PathologyReportingAPI.html#human-readable-and-computer-processable).
+That makes the documents humanly readable, which they must be for a GP system to display, print
+or forward them safely.
+
+**Other additions** - they all come from content that is in the `ORU^R01`, so leaving them out
+would lose information:
+
+- a **Patient** resource with the NHS Number, hospital number (MRN) and laboratory patient number
+  (PID-3) and demographics (PID-5, PID-7, PID-8); NHS England's examples have only the NHS Number
+- **order details** on each ServiceRequest: the test requested (`code`, OBR-4), the Filler Order
+  Number (ORC-3), identifier types (`PLAC`, `FILL`, `ACSN`) and the ODS code of the assigning
+  organisation (`assigner`)
+- **`DiagnosticReport.effectiveDateTime`** - the specimen collection time (OBR-7)
+- a **second code** where the meaning is the same: LOINC `11502-2` Laboratory report alongside
+  SNOMED CT `721981007`, and the HL7 v2 table 0074 discipline (OBR-24) alongside the SNOMED CT
+  specialty
+- a **report comment section** when the report has a comment (NTE after the OBR: the GTT and urine
+  examples)
+- references that carry the **identifier and name** as well as the `reference`, so a receiver can
+  match the practitioner and organisation without resolving them
+
+**Consistency** - the conversion takes each value from one place in the `ORU^R01`, which makes
+some values consistent that are not in NHS England's examples (not intended as corrections, but
+worth knowing):
+
+- `Composition.date` is when the report was issued (OBR-22). NHS England uses the same date in all
+  nine examples, in one case before the report was issued
+- every result's `issued` is the report's (OBR-22); two NHS England examples carry dates from
+  other examples
+- `ServiceRequest.status` is `completed` for a final report (ORC-5 `CM`), not `active`
+- one section per test group: in the Lipids/HbA1c example NHS England has a single section and
+  the HbA1c result is in none
+
+**Not carried** through HL7 v2 (so not in these documents): the `valueset-reference` extensions on
+result codes (which NHS England list a code is from - they can be re-derived from the code),
+`ServiceRequest.category`, `PractitionerRole.code` and `specialty`, the FBC reason for request
+(could be sent in OBR-31), the GTT specimens' fasting status (no SPM field) and the Provenance
+agent type. The HbA1c interpretive reference range text becomes a result comment, because OBX-7
+cannot hold several lines.
+
+**Profile** - the documents declare `England-Bundle-Lab-Pathology|0.1.0`, as the API
+specification says (NHS England's examples declare `Bundle-eu-lab|2.0.0`). The published version
+of that profile has a slicing defect (see the
+[Pathology Laboratory Reporting API](PathologyReportingAPI.html#profiles) page), so the validator
+reports slicing errors for these examples that come from the profile, not from the documents.
+
 ### Notes
 
 - **Patient** - the NHS England examples identify the patient by NHS Number only, but PID-5
@@ -72,6 +147,8 @@ back: `ORU^R01` to a FHIR Message, then the FHIR Message to a FHIR Document for 
 
 - NHS England FHIR Document: [Bundle-HbA1c-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-HbA1c-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-HbA1c-Report-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/HbA1c-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/HbA1c-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-HbA1c-Report-Example](Bundle-Message-HbA1c-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/HbA1c-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-HbA1c-Report-Example](Bundle-Document-HbA1c-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/HbA1c-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202203081209+0000||ORU^R01^ORU_R01|NHSE-EX-0001|P|2.5.1|||AL|||UNICODE UTF-8
@@ -90,6 +167,8 @@ SPM|1|SPC-REQ-20220129-000362&B82033^SPC-Lab-20220129-008927&Y8J7D||^^^^^^^^Veno
 
 - NHS England FHIR Document: [Bundle-CRP-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-CRP-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-CRP-Report-Document-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/CRP-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/CRP-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-CRP-Report-Example](Bundle-Message-CRP-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/CRP-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-CRP-Report-Example](Bundle-Document-CRP-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/CRP-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202203081209+0000||ORU^R01^ORU_R01|NHSE-EX-0002|P|2.5.1|||AL|||UNICODE UTF-8
@@ -107,6 +186,8 @@ SPM|1|SPC-REQ-20220307-000105&B82033^SPC-Lab-20220307-007856&Y8J7D||^^^^^^^^Veno
 
 - NHS England FHIR Document: [Bundle-HBsAg-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-HBsAg-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-HBsAg-Report-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/HBsAg-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/HBsAg-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-HBsAg-Report-Example](Bundle-Message-HBsAg-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/HBsAg-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-HBsAg-Report-Example](Bundle-Document-HBsAg-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/HBsAg-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202203081209+0000||ORU^R01^ORU_R01|NHSE-EX-0003|P|2.5.1|||AL|||UNICODE UTF-8
@@ -124,6 +205,8 @@ SPM|1|SPC-REQ-20220307-000051&B82033^SPC-Lab-20220307-006130&Y8J7D||^^^^^^^^Veno
 
 - NHS England FHIR Document: [Bundle-HPV-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-HPV-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-HPV-Report-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/HPV-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/HPV-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-HPV-Report-Example](Bundle-Message-HPV-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/HPV-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-HPV-Report-Example](Bundle-Document-HPV-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/HPV-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202203081209+0000||ORU^R01^ORU_R01|NHSE-EX-0004|P|2.5.1|||AL|||UNICODE UTF-8
@@ -143,6 +226,8 @@ SPM|1|SPC-REQ-20220321-000065&B82033^SPC-Lab-20220322-005962&Y8J7D||^^^^^^^^Cerv
 
 - NHS England FHIR Document: [Bundle-FBC-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-FBC-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-FBC-Report-Document-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/FBC-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/FBC-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-FBC-Report-Example](Bundle-Message-FBC-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/FBC-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-FBC-Report-Example](Bundle-Document-FBC-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/FBC-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202202091117+0000||ORU^R01^ORU_R01|NHSE-EX-0005|P|2.5.1|||AL|||UNICODE UTF-8
@@ -172,6 +257,8 @@ SPM|1|SPC-REQ-20220208-000016&B82033^SPC-Lab-20220208-001397&Y8J7D||^^^^^^^^Veno
 
 - NHS England FHIR Document: [Bundle-Lipids-HbA1c-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-Lipids-HbA1c-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-Lipids-HbA1c-Report-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/Lipids-HbA1c-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/Lipids-HbA1c-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-Lipids-HbA1c-Report-Example](Bundle-Message-Lipids-HbA1c-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/Lipids-HbA1c-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-Lipids-HbA1c-Report-Example](Bundle-Document-Lipids-HbA1c-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/Lipids-HbA1c-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202203081209+0000||ORU^R01^ORU_R01|NHSE-EX-0006|P|2.5.1|||AL|||UNICODE UTF-8
@@ -196,6 +283,8 @@ SPM|1|SPC-REQ-20220705-000004&B82033^SPC-Lab-20220705-006215&Y8J7D||^^^^^^^^Veno
 
 - NHS England FHIR Document: [Bundle-LFT-UandE-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-LFT-UandE-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-LFT-UandE-Report-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/LFT-UandE-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/LFT-UandE-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-LFT-UandE-Report-Example](Bundle-Message-LFT-UandE-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/LFT-UandE-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-LFT-UandE-Report-Example](Bundle-Document-LFT-UandE-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/LFT-UandE-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202203081209+0000||ORU^R01^ORU_R01|NHSE-EX-0007|P|2.5.1|||AL|||UNICODE UTF-8
@@ -225,6 +314,8 @@ SPM|1|SPC-REQ-20220307-000014&B82033^SPC-Lab-20220307-007856&Y8J7D||^^^^^^^^Veno
 
 - NHS England FHIR Document: [Bundle-GTT-Unstructured-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-GTT-Unstructured-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-GTT-Unstructured-Report-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/GTT-Unstructured-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/GTT-Unstructured-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-GTT-Unstructured-Report-Example](Bundle-Message-GTT-Unstructured-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/GTT-Unstructured-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-GTT-Unstructured-Report-Example](Bundle-Document-GTT-Unstructured-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/GTT-Unstructured-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202203081209+0000||ORU^R01^ORU_R01|NHSE-EX-0008|P|2.5.1|||AL|||UNICODE UTF-8
@@ -245,6 +336,8 @@ SPM|3|SPC-REQ-20220209-000084&B82033^SPC-Lab-20220209-001587&Y8J7D||^^^^^^^^Veno
 
 - NHS England FHIR Document: [Bundle-Urine-MCS-Unstructured-Report-Example](https://simplifier.net/guide/pathology-fhir-implementation-guide/Home/FHIRAssets/AllAssets/Profiles/Examples/Bundles/Bundle-Urine-MCS-Unstructured-Report-Example?version=0.5.1) (package `fhir.r4.nhsengland.pathology` 0.3.0, `Pathology-Bundle-Urine-MCS-01-Unstructured-Report-Example.json`)
 - HL7 v2 file: [`examples/hl7v2/ORU_R01/Urine-MCS-Unstructured-Report-Example.hl7`](https://github.com/KevinMayfield/PathologyAndLaboratory/blob/main/examples/hl7v2/ORU_R01/Urine-MCS-Unstructured-Report-Example.hl7)
+- FHIR Message: [Bundle-Message-Urine-MCS-Unstructured-Report-Example](Bundle-Message-Urine-MCS-Unstructured-Report-Example.html) (notebook `01-oru-r01-to-fhir-message`, file `examples/fhir/message/Urine-MCS-Unstructured-Report-Example.json`)
+- FHIR Document for the NHS England API: [Bundle-Document-Urine-MCS-Unstructured-Report-Example](Bundle-Document-Urine-MCS-Unstructured-Report-Example.html) (notebook `02-fhir-message-to-fhir-document`, file `examples/fhir/document/Urine-MCS-Unstructured-Report-Example.json`)
 
 ```
 MSH|^~\&|LIMS|Y8J7D|GPSYSTEM|B82033|202203081209+0000||ORU^R01^ORU_R01|NHSE-EX-0009|P|2.5.1|||AL|||UNICODE UTF-8

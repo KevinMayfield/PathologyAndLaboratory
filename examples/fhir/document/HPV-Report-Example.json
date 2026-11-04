@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "e60e2462-d63c-5482-aa90-a7b90a3a7f5f",
+  "id": "Document-HPV-Report-Example",
   "meta": {
     "profile": [
       "https://fhir.nhs.uk/England/StructureDefinition/England-Bundle-Lab-Pathology|0.1.0"
@@ -685,6 +685,10 @@
           "profile": [
             "https://fhir.nhs.uk/England/StructureDefinition/England-Provenance-Lab-Pathology|0.1.0"
           ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Laboratory report REP-20220403-008209 sent by product EXAMPLE-PRODUCT:Y8J7D.</p></div>"
         },
         "target": [
           {

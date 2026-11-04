@@ -19,3 +19,4 @@
 /.cache/
 /validator_cli.jar
 .ipynb_checkpoints/
+__pycache__/

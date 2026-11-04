@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "9a1ee7db-5e92-50f9-9829-625579bf78b5",
+  "id": "Message-GTT-Unstructured-Report-Example",
   "meta": {
     "profile": [
       "https://examplesihe.org.uk/StructureDefinition/BundleMessage"

@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "c4d100fe-6763-552e-a796-586dfcd4c72b",
+  "id": "Document-Urine-MCS-Unstructured-Report-Example",
   "meta": {
     "profile": [
       "https://fhir.nhs.uk/England/StructureDefinition/England-Bundle-Lab-Pathology|0.1.0"
@@ -694,6 +694,10 @@
           "profile": [
             "https://fhir.nhs.uk/England/StructureDefinition/England-Provenance-Lab-Pathology|0.1.0"
           ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Laboratory report REP-20220225-006301 sent by product EXAMPLE-PRODUCT:Y8J7D.</p></div>"
         },
         "target": [
           {

@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "314959cf-226b-5c86-9f6a-05d7e304ea5c",
+  "id": "Document-FBC-Report-Example",
   "meta": {
     "profile": [
       "https://fhir.nhs.uk/England/StructureDefinition/England-Bundle-Lab-Pathology|0.1.0"
@@ -1967,6 +1967,10 @@
           "profile": [
             "https://fhir.nhs.uk/England/StructureDefinition/England-Provenance-Lab-Pathology|0.1.0"
           ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Laboratory report REP-20220209-001369 sent by product EXAMPLE-PRODUCT:Y8J7D.</p></div>"
         },
         "target": [
           {

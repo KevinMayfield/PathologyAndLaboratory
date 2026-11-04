@@ -38,6 +38,14 @@ canonical `https://examplesihe.org.uk` - do not use `fhir.nwgenomics.nhs.uk` URL
   `examples/fhir/message/`) and `notebooks/02-fhir-message-to-fhir-document.ipynb` (-> NHS
   England FHIR Document, `examples/fhir/document/`). Validation cells need
   `VALIDATOR_JAR` (or `./validator_cli.jar`, gitignored) and `output/package.tgz`.
+- The notebook outputs are IG examples: `examples/fhir/message` and `examples/fhir/document`
+  are `path-resource` folders, and `scripts/register_examples.py` writes their `resources:` /
+  `groups:` block at the end of `sushi-config.yaml` (generated - between markers). Bundle ids
+  are `Message-<example>` / `Document-<example>`. Regenerate in this order:
+  `scripts/nhse_document_to_oru.py` -> notebook 01 -> notebook 02 ->
+  `scripts/register_examples.py` -> `scripts/nhse_document_to_oru.py` (page links) -> build.
+- The documents declare NHS England profiles, so `fhir.r4.nhsengland.pathology` 0.3.0 is a
+  dependency.
 - Research notes and open questions that should not be published:
   `notes/research.md` (outside `input/`, so the IG Publisher ignores it).
 
